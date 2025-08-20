@@ -113,6 +113,50 @@ h2{
 .displayMenu{
     display: flex !important;
 }
+
+/* Tablas */
+.tabla-precios {
+  width: 100%;
+  margin: 10px 0 16px;
+}
+
+/* Tabla responsive */
+.tabla {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; 
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
+}
+
+/* Bordes y espaciado */
+.tabla th,
+.tabla td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+/* Encabezado */
+.tabla th {
+  background: #f8f8f8;
+  font-weight: 700;
+  letter-spacing: .2px;
+  white-space: nowrap;
+}
+
+/* Ajustes finos por breakpoint */
+@media (max-width: 768px) {
+  .tabla th, .tabla td { padding: 8px; }
+}
+
+@media (max-width: 480px) {
+  .tabla { font-size: 0.85rem; }
+  .tabla th, .tabla td { padding: 6px 4px; }
+}
+
+
 .whatsapp{
     color: white;
     background: green;    
