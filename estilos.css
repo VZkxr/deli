@@ -4,7 +4,6 @@
     --colorComplementario:#80064A;
 }
 
-
 body{
     background: url(img/bg.jpg);
     font-family: Arial, Helvetica, sans-serif;
@@ -24,6 +23,10 @@ nav{
     justify-content: center;
     gap: 10px;
     background-color: var(--colorPrimario);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 nav #navHamb{
     display: none;
@@ -86,6 +89,7 @@ footer{
 .title{ 
     color: var(--colorPrimario);
     border-bottom: 2px solid var(--colorSecundario);
+    scroll-margin-top: 40px;
 }
 h2{
     color: var(--colorComplementario);
@@ -186,6 +190,9 @@ h2{
     .productos div img{       
         height: 160px;
     }   
+    .title {
+        scroll-margin-top: 50px;
+    }
     
 }
 
