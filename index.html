@@ -195,8 +195,20 @@
             <p>Copyright &copy; 2025 D'eli. Todos los derechos reservados.</p>
         </footer>
     </div> 
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const nav = document.querySelector("nav");
+
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 130) {
+                nav.classList.add("scrolled");
+            } else {
+                nav.classList.remove("scrolled");
+            }
+        });
+
+        // Menú Hamburguesa
         const navHamb = document.getElementById("navHamb");
         const navMenu = document.getElementById("navMenu");
         const links = navMenu.querySelectorAll("a");

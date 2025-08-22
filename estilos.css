@@ -22,29 +22,58 @@ nav{
     display: flex;
     justify-content: center;
     gap: 10px;
-    background-color: var(--colorPrimario);
-
+    background-color: var(--colorSecundario); /* Inicialmente transparente */
+    transition: all 0.4s ease; /* Transición suave para todo */
     position: sticky;
     top: 0;
     z-index: 1000;
-}
-nav #navHamb{
-    display: none;
-    color: var(--colorSecundario);
-    padding: 3px;
-}
-nav #navMenu{
-    display: flex;
-    justify-content: center;
-}
-nav #navMenu a{
-    color: var(--colorSecundario);
-    padding: 10px;
-    text-decoration: none;
+    padding: 10px 0; /* Altura inicial */
 }
 
+/* Enlaces del menú */
+nav a {
+    color: var(--colorPrimario); /* Letras rosas iniciales */
+    padding: 10px;
+    text-decoration: none;
+    transition: color 0.4s ease, background-color 0.4s ease;
+}
+
+/* Estado al hacer scroll */
+nav.scrolled {
+    background-color: var(--colorPrimario); /* Fondo rosa al hacer scroll */
+}
+
+nav.scrolled a {
+    color: white; /* Letras blancas al hacer scroll */
+}
+
+/* Menú hamburguesa */
+nav #navHamb{
+    display: none;
+    color: var(--colorComplementario);
+    padding: 3px;
+    cursor: pointer;
+}
+
+/* Hover de enlaces */
 nav a:hover{
     background: var(--colorComplementario);
+    color: white;
+}
+
+@media (max-width:768px) {
+    nav{
+        justify-content: space-between;
+    }
+    nav #navHamb{
+        display: block;
+    }
+    nav #navMenu{
+        display: none;
+        flex-direction: column;
+        margin-top: 10px;
+        width: 100%;        
+    }
 }
 /* FIN MENU */
 
@@ -175,24 +204,10 @@ h2{
     text-align: center;
 }
 @media (max-width:768px) {
-    nav{
-        justify-content: space-between;
-    }
-    nav #navHamb{
-        display: block;
-    }
-    nav #navMenu{
-        display: none;
-        flex-direction: column;
-        margin-top: 30px;
-        width: 100%;        
-    }
     .productos div img{       
         height: 160px;
     }   
     .title {
-        scroll-margin-top: 50px;
+        scroll-margin-top: 70px;
     }
-    
 }
-
