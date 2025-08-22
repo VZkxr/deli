@@ -182,7 +182,6 @@ h2{
   word-wrap: break-word;
 }
 
-/* Encabezado */
 .tabla th {
   background: #f8f8f8;
   font-weight: 700;
@@ -190,7 +189,6 @@ h2{
   white-space: nowrap;
 }
 
-/* Ajustes finos por breakpoint */
 @media (max-width: 768px) {
   .tabla th, .tabla td { padding: 8px; }
 }
