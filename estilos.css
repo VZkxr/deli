@@ -50,9 +50,20 @@ nav.scrolled a {
 /* Menú hamburguesa */
 nav #navHamb{
     display: none;
-    color: var(--colorComplementario);
-    padding: 3px;
+    color: var(--colorPrimario);
+    padding: 1px;
     cursor: pointer;
+    transition: color 0.4s ease, background-color 0.4 ease;
+}
+
+/* Hover de menú hamburguesa */
+nav #navHamb:hover {
+    background: var(--colorComplementario);
+    color: white;
+}
+
+nav.scrolled #navHamb {
+    color: white;
 }
 
 /* Hover de enlaces */
@@ -208,6 +219,6 @@ h2{
         height: 160px;
     }   
     .title {
-        scroll-margin-top: 70px;
+        scroll-margin-top: 65px;
     }
 }
