@@ -213,7 +213,7 @@ h2{
         grid-template-columns: 1fr;
     }
     .productos div img{       
-        height: 160px;
+        width: 160px;
     } 
 }
 /* FIN PRODUCTOS */
@@ -239,7 +239,7 @@ h2{
 }
 
 .precios-multiples .precio {
-    background: var(--colorComplementario); /* mismo estilo que tus otros precios */
+    background: var(--colorComplementario);
     padding: 4px 10px;
     border-radius: 12px;
     font-weight: bold;
