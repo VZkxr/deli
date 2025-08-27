@@ -136,27 +136,11 @@
                     <div class="detalle">
                         <div class="titulo-precio">
                             <h2>Con Yogurth</h2>
-                        </div>
-                        <div class="precios-multiples">
-                            <div>
-                                <span class="etiqueta">Ch.</span>
-                                <span class="precio">$30</span>
-                            </div>
-                            <div>
-                                <span class="etiqueta">Med.</span>
-                                <span class="precio">$35</span>
-                            </div>
-                            <div>
-                                <span class="etiqueta">Gr.</span>
-                                <span class="precio">$45</span>
-                            </div>
-                            <div>
-                                <span class="etiqueta">1/2</span>
-                                <span class="precio">$85</span>
-                            </div>
+                            <span class="linea"></span>
+                            <span class="precio">$30<</span>
                         </div>
                         <p>Gelatina con yogurth cremosa y fresca en sus distintas presentaciones.</p>
-                        <button class="btn-agregar" data-producto="Yogurth">Agregar</button>
+                        <button class="btn-agregar" data-producto="Con Yogurth">Agregar</button>
                     </div>
                 </div>
                 <div class="producto-item">
@@ -180,7 +164,7 @@
                             <span class="precio">$28</span>
                         </div>
                         <p>La mejor gelatina la tenemos en D'eli.</p>
-                        <button class="btn-agregar" data-producto="TresLe">Agregar</button>
+                        <button class="btn-agregar" data-producto="Tres Leches de Durazno">Agregar</button>
                     </div>
                 </div>
                 <div class="producto-item">
@@ -192,7 +176,7 @@
                             <span class="precio">$15</span>
                         </div>
                         <p>Explora los sabores de la gloria con este delicioso flan casero de vainilla.</p>
-                        <button class="btn-agregar" data-producto="FlanCas">Agregar</button>
+                        <button class="btn-agregar" data-producto="Flan Casero de Vainilla">Agregar</button>
                     </div>
                 </div>
             </div>
@@ -208,7 +192,7 @@
                             <span class="precio">$30</span>
                         </div>
                         <p>Delicioso flan casero con caramelo suave.</p>
-                        <button class="btn-agregar" data-producto="FlanNap">Agregar</button>
+                        <button class="btn-agregar" data-producto="Flan Napolitano">Agregar</button>
                     </div>
                 </div>
                 <div class="producto-item">
@@ -220,7 +204,7 @@
                             <span class="precio">$40</span>
                         </div>
                         <p>Pay de Limón hecho con los mejores ingredientes.</p>
-                        <button class="btn-agregar" data-producto="PayLim">Agregar</button>
+                        <button class="btn-agregar" data-producto="Pay de Limón">Agregar</button>
                     </div>
                 </div>
                 <div class="producto-item">
@@ -232,7 +216,7 @@
                             <span class="precio">$45</span>
                         </div>
                         <p>Pastel posible hecho por D'eli.</p>
-                        <button class="btn-agregar" data-producto="Imposible">Agregar</button>
+                        <button class="btn-agregar" data-producto="Pastel Imposible">Agregar</button>
                     </div>
                 </div>
                 <div class="producto-item">
@@ -244,7 +228,7 @@
                             <span class="precio">$45</span>
                         </div>
                         <p>Pastel de chocolate real, hecho solo para la realeza.</p>
-                        <button class="btn-agregar" data-producto="Choco">Agregar</button>
+                        <button class="btn-agregar" data-producto="Pastel de Chocolate">Agregar</button>
                     </div>
                 </div>
                 <div class="producto-item">
@@ -256,7 +240,7 @@
                             <span class="precio">$50</span>
                         </div>
                         <p>Esta deliciosa rebanada de tres leches relleno de flan es una nueva experiencia.</p>
-                        <button class="btn-agregar" data-producto="Beso">Agregar</button>
+                        <button class="btn-agregar" data-producto="Pastel de Beso de Angel">Agregar</button>
                     </div>
                 </div>
             </div>
@@ -323,6 +307,7 @@
                         <div class="titulo-precio">
                             <h2>Cigarros</h2>
                             <span class="linea"></span>
+                            <span class="precio">$7</span>
                         </div>
                         <p>Producto aún no clasificado.</p>
                         <button class="btn-agregar" data-producto="Cigarros">Agregar</button>
@@ -339,6 +324,18 @@
     </div> 
 
     <script src="script.js"></script>
+
+<!-- Modal de opciones -->
+<div id="modal-precios" class="modal">
+  <div class="modal-contenido">
+    <span id="cerrarModal" class="cerrar">&times;</span>
+    <h2 id="modal-titulo"></h2>
+    <p>Selecciona un tamaño:</p>
+    <div id="opciones-precio" class="opciones-precio">
+      <!-- Aquí se insertan dinámicamente los precios -->
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
