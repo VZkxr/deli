@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Cerrar el menú cuando se hace clic en cualquier enlace
     links.forEach(link => {
-        link.addEventListener("click", function() {
-            navMenu.classList.remove("displayMenu");
+    link.addEventListener("click", function() {
+        navMenu.classList.remove("displayMenu");
         });
     });
 });
