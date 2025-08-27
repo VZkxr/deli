@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // --- Productos con precio fijo ---
         else if (preciosFijos[producto]) {
           const precio = preciosFijos[producto];
-          alert(`Agregado: ${producto} - $${precio}`);
+          agregarAlCarrito(producto, precio);
         }
       });
     });
@@ -117,5 +117,111 @@ document.addEventListener("DOMContentLoaded", function() {
     cerrarModal.addEventListener("click", () => modal.style.display = "none");
     window.addEventListener("click", (e) => {
       if (e.target === modal) modal.style.display = "none";
+    });
+
+    // --- Carrito de compras ---
+    let carrito = [];
+    const btnEnviar = document.getElementById("btn-enviar");
+
+    // Generador de número de orden
+    function generarOrden() {
+      return Math.floor(1000 + Math.random() * 9000); // Ej: 1234
+    }
+
+        // --- Mostrar toast "Agregado!" ---
+    function mostrarToast() {
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.textContent = "¡Agregado!";
+      document.body.appendChild(toast);
+
+      // Eliminar después de 1.5s (igual que animación)
+      setTimeout(() => {
+        toast.remove();
+      }, 1500);
+    }
+
+    // Función para agregar al carrito
+    function agregarAlCarrito(nombre, precio) {
+      const existente = carrito.find(item => item.nombre === nombre && item.precio === precio);
+      if (existente) {
+        existente.cantidad++;
+      } else {
+        carrito.push({ nombre, precio, cantidad: 1 });
+      }
+
+      // Activar botón enviar
+      btnEnviar.disabled = false;
+
+      // Mostrar el toast
+      mostrarToast();
+    }
+
+    // reemplaza los alert() con agregarAlCarrito()
+    document.querySelectorAll(".btn-agregar").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const producto = btn.dataset.producto;
+
+        if (preciosConCrema[producto]) {
+          modalTitulo.textContent = producto;
+          modalDescripcion.textContent = "Elige un tamaño:";
+          opcionesPrecio.innerHTML = "";
+
+          Object.entries(preciosConCrema[producto]).forEach(([etiqueta, valor]) => {
+            const btnPrecio = document.createElement("button");
+            btnPrecio.textContent = `${etiqueta} - $${valor}`;
+            btnPrecio.addEventListener("click", () => {
+              agregarAlCarrito(`${producto} ${etiqueta}`, valor);
+              modal.style.display = "none";
+            });
+            opcionesPrecio.appendChild(btnPrecio);
+          });
+
+          modal.style.display = "flex";
+        }
+
+        else if (producto === "Agua") {
+          modalTitulo.textContent = "Gelatina de Agua";
+          modalDescripcion.textContent = "Elige un sabor:";
+          opcionesPrecio.innerHTML = "";
+
+          Object.entries(saboresAgua).forEach(([sabor, precio]) => {
+            const btnSabor = document.createElement("button");
+            btnSabor.textContent = `${sabor} - $${precio}`;
+            btnSabor.addEventListener("click", () => {
+              agregarAlCarrito(`Gelatina de ${sabor}`, precio);
+              modal.style.display = "none";
+            });
+            opcionesPrecio.appendChild(btnSabor);
+          });
+
+          modal.style.display = "flex";
+        }
+
+        else if (preciosFijos[producto]) {
+          const precio = preciosFijos[producto];
+          agregarAlCarrito(producto, precio);
+        }
+      });
+    });
+
+    // --- Enviar pedido por WhatsApp ---
+    btnEnviar.addEventListener("click", () => {
+      const numero = "521XXXXXXXXXX"; // número de la tienda
+      const orden = generarOrden();
+
+      let mensaje = `Orden #${orden}%0A`;
+      let total = 0;
+
+      carrito.forEach((item, i) => {
+        let subtotal = item.precio * item.cantidad;
+        mensaje += `${i+1}. ${item.nombre} $${item.precio} x${item.cantidad} %0A`;
+        total += subtotal;
+      });
+
+      mensaje += `----Total: $${total}`;
+
+      const url = `https://wa.me/${numero}?text=${mensaje}`;
+      window.open(url, "_blank");
     });
 });
