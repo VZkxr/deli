@@ -88,9 +88,41 @@ document.addEventListener("DOMContentLoaded", function() {
         const texto = document.createElement("span");
         texto.textContent = `${i+1}. ${item.nombre} - $${item.precio} x${item.cantidad}`;
 
+        // Contenedor de acciones (+, -, eliminar)
+        const acciones = document.createElement("div");
+        acciones.className = "acciones-carrito";
+
+        // Botón restar (-)
+        const btnMenos = document.createElement("button");
+        btnMenos.textContent = "−";
+        btnMenos.className = "btn-menos";
+        btnMenos.addEventListener("click", () => {
+          if (item.cantidad > 1) {
+            item.cantidad--;
+          } else {
+            carrito.splice(i, 1); // si llega a 0, se elimina
+          }
+          if (carrito.length === 0) {
+            btnEnviar.disabled = true;
+            btnCarrito.disabled = true;
+            modalCarrito.style.display = "none";
+          }
+          actualizarCarritoUI();
+        });
+
+        // Botón sumar (+)
+        const btnMas = document.createElement("button");
+        btnMas.textContent = "+";
+        btnMas.className = "btn-mas";
+        btnMas.addEventListener("click", () => {
+          item.cantidad++;
+          actualizarCarritoUI();
+        });
+
+        // Botón eliminar (ícono de basura)
         const btnEliminar = document.createElement("button");
         btnEliminar.className = "btn-eliminar";
-        btnEliminar.textContent = "Eliminar";
+        btnEliminar.innerHTML = "🗑️"; // puedes cambiar por SVG si quieres más pro
         btnEliminar.addEventListener("click", () => {
           carrito.splice(i, 1);
           if (carrito.length === 0) {
@@ -101,13 +133,18 @@ document.addEventListener("DOMContentLoaded", function() {
           actualizarCarritoUI();
         });
 
+        acciones.appendChild(btnMenos);
+        acciones.appendChild(btnMas);
+        acciones.appendChild(btnEliminar);
+
         fila.appendChild(texto);
-        fila.appendChild(btnEliminar);
+        fila.appendChild(acciones);
         listaCarrito.appendChild(fila);
 
         total += item.precio * item.cantidad;
         items += item.cantidad;
       });
+
 
       totalCarrito.textContent = `Total: $${total}`;
       // contador del botón
