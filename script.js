@@ -62,57 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
       "Cigarros": 7
     };
 
-    // --- Lógica de botones ---
-    document.querySelectorAll(".btn-agregar").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const producto = btn.dataset.producto;
-
-        // --- Productos con precios múltiples ---
-        if (preciosConCrema[producto]) {
-          modalTitulo.textContent = producto;
-          modalDescripcion.textContent = "Elige un tamaño:";
-          opcionesPrecio.innerHTML = "";
-
-          Object.entries(preciosConCrema[producto]).forEach(([etiqueta, valor]) => {
-            const btnPrecio = document.createElement("button");
-            btnPrecio.textContent = `${etiqueta} - $${valor}`;
-            btnPrecio.addEventListener("click", () => {
-              alert(`Agregado: ${producto} (${etiqueta}) - $${valor}`);
-              modal.style.display = "none";
-            });
-            opcionesPrecio.appendChild(btnPrecio);
-          });
-
-          modal.style.display = "flex";
-        }
-
-        // --- Producto De Agua con SABORES ---
-        else if (producto === "Agua") {
-          modalTitulo.textContent = "Gelatina de Agua";
-          modalDescripcion.textContent = "Elige un sabor:";
-          opcionesPrecio.innerHTML = "";
-
-          Object.entries(saboresAgua).forEach(([sabor, precio]) => {
-            const btnSabor = document.createElement("button");
-            btnSabor.textContent = `${sabor} - $${precio}`;
-            btnSabor.addEventListener("click", () => {
-              alert(`Agregado: Gelatina de Agua (${sabor}) - $${precio}`);
-              modal.style.display = "none";
-            });
-            opcionesPrecio.appendChild(btnSabor);
-          });
-
-          modal.style.display = "flex";
-        }
-
-        // --- Productos con precio fijo ---
-        else if (preciosFijos[producto]) {
-          const precio = preciosFijos[producto];
-          agregarAlCarrito(producto, precio);
-        }
-      });
-    });
-
     // --- Cerrar modal ---
     cerrarModal.addEventListener("click", () => modal.style.display = "none");
     window.addEventListener("click", (e) => {
@@ -122,6 +71,82 @@ document.addEventListener("DOMContentLoaded", function() {
     // --- Carrito de compras ---
     let carrito = [];
     const btnEnviar = document.getElementById("btn-enviar");
+    const btnCarrito = document.getElementById("btn-carrito");
+    const modalCarrito = document.getElementById("modal-carrito");
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalCarrito = document.getElementById("total-carrito");
+    const cerrarCarrito = document.getElementById("cerrarCarrito");
+
+    function actualizarCarritoUI() {
+      listaCarrito.innerHTML = "";
+      let total = 0; items = 0;
+
+      carrito.forEach((item, i) => {
+        const fila = document.createElement("div");
+        fila.className = "item-carrito";
+
+        const texto = document.createElement("span");
+        texto.textContent = `${i+1}. ${item.nombre} - $${item.precio} x${item.cantidad}`;
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.className = "btn-eliminar";
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.addEventListener("click", () => {
+          carrito.splice(i, 1);
+          if (carrito.length === 0) {
+            btnEnviar.disabled = true;
+            btnCarrito.disabled = true;
+            modalCarrito.style.display = "none";
+          }
+          actualizarCarritoUI();
+        });
+
+        fila.appendChild(texto);
+        fila.appendChild(btnEliminar);
+        listaCarrito.appendChild(fila);
+
+        total += item.precio * item.cantidad;
+        items += item.cantidad;
+      });
+
+      totalCarrito.textContent = `Total: $${total}`;
+      // contador del botón
+      btnCarrito.textContent = `Ver carrito (${items})`;
+    }
+
+    // Sobrescribimos agregarAlCarrito
+    function agregarAlCarrito(nombre, precio) {
+      const existente = carrito.find(item => item.nombre === nombre && item.precio === precio);
+      if (existente) {
+        existente.cantidad++;
+      } else {
+        carrito.push({ nombre, precio, cantidad: 1 });
+      }
+
+      // Activar botones
+      btnEnviar.disabled = false;
+      btnCarrito.disabled = false;
+
+      // Actualizar UI del carrito
+      actualizarCarritoUI();
+
+      // Toast
+      mostrarToast();
+    }
+
+    // --- Botón Ver carrito ---
+    btnCarrito.addEventListener("click", () => {
+      actualizarCarritoUI();
+      modalCarrito.style.display = "flex";
+    });
+
+    cerrarCarrito.addEventListener("click", () => {
+      modalCarrito.style.display = "none";
+    });
+    window.addEventListener("click", (e) => {
+      if (e.target === modalCarrito) modalCarrito.style.display = "none";
+    });
+
 
     // Generador de número de orden
     function generarOrden() {
@@ -139,22 +164,6 @@ document.addEventListener("DOMContentLoaded", function() {
       setTimeout(() => {
         toast.remove();
       }, 1500);
-    }
-
-    // Función para agregar al carrito
-    function agregarAlCarrito(nombre, precio) {
-      const existente = carrito.find(item => item.nombre === nombre && item.precio === precio);
-      if (existente) {
-        existente.cantidad++;
-      } else {
-        carrito.push({ nombre, precio, cantidad: 1 });
-      }
-
-      // Activar botón enviar
-      btnEnviar.disabled = false;
-
-      // Mostrar el toast
-      mostrarToast();
     }
 
     // reemplaza los alert() con agregarAlCarrito()
