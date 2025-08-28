@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Botón eliminar (ícono de basura)
         const btnEliminar = document.createElement("button");
         btnEliminar.className = "btn-eliminar";
-        btnEliminar.innerHTML = "🗑️"; // puedes cambiar por SVG si quieres más pro
+        btnEliminar.innerHTML = `<img src="img/trash.svg" class="btn-eliminar"/>`;
         btnEliminar.addEventListener("click", () => {
           carrito.splice(i, 1);
           if (carrito.length === 0) {

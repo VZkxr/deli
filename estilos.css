@@ -425,7 +425,7 @@ h2{
 /* Botón flotante Ver carrito */
 .btn-carrito {
   position: fixed;
-  bottom: 70px;   /* un poco más arriba que Enviar */
+  bottom: 70px;  
   right: 20px;
   background: var(--colorPrimario);
   color: white;
@@ -467,15 +467,31 @@ h2{
 .item-carrito span {
   font-size: 14px;
 }
-.btn-eliminar {
-  background: red;
+
+.acciones-carrito {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.btn-mas, .btn-menos {
+  background: var(--colorPrimario);
   color: white;
   border: none;
   padding: 4px 8px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
 }
-.btn-eliminar:hover {
-  background: darkred;
+.btn-mas:hover, .btn-menos:hover {
+  background: var(--colorComplementario);
+}
+
+.btn-eliminar {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 35px;
+  line-height: 1;
 }
