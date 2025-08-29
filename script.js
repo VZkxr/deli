@@ -392,7 +392,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       totalCarrito.textContent = `Total: $${total}`;
       // contador del botón
-      btnCarrito.textContent = `Ver carrito (${items})`;
+      document.getElementById("btn-carrito-text").textContent = `Ver carrito (${items})`;
     }
 
     // Sobrescribimos agregarAlCarrito
