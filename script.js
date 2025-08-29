@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // --- Enviar pedido por WhatsApp ---
     btnEnviar.addEventListener("click", () => {
-      const numero = "521XXXXXXXXXX"; // número de la tienda
+      const numero = "525561037319"; // número de la tienda
       const orden = generarOrden();
 
       let mensaje = `Orden #${orden}%0A`;
