@@ -340,6 +340,7 @@ h2{
   display: flex;
   flex-direction: column;
   position: relative;   /* necesario para que el botón se posicione dentro */
+  animation: fadeIn 0.3s ease;
 }
 
 /* Botón cerrar */
@@ -494,4 +495,66 @@ h2{
   cursor: pointer;
   width: 35px;
   line-height: 1;
+}
+
+#form-charola label {
+  display: block;
+  margin: 6px 0;
+  text-align: left;
+}
+
+.paso-charola {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Formularios dentro del modal alineados a la izquierda */
+.form-opciones {
+  text-align: left;
+  margin: 10px 0;
+}
+.form-opciones label {
+  display: block;
+  margin: 4px 0;
+}
+
+.scroll-toppings {
+  max-height: 250px;   /* ajusta según lo que quieras mostrar */
+  overflow-y: auto;
+  padding-right: 5px;  /* deja espacio para el scrollbar */
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.scroll-toppings::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-toppings::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+.scroll-toppings::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* apariencia "desactivada" (visualmente) pero sigue recibiendo clicks */
+.btn-disabled {
+  opacity: 0.65;
+  filter: grayscale(15%);
+}
+
+/* mensaje de error simple dentro del modal */
+.error-inline {
+  color: #c0392b;
+  font-weight: 700;
+  transition: opacity 0.25s ease, transform 0.2s ease;
+  opacity: 1;
 }

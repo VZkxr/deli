@@ -26,6 +26,251 @@ document.addEventListener("DOMContentLoaded", function() {
     const opcionesPrecio = document.getElementById("opciones-precio");
     const cerrarModal = document.getElementById("cerrarModal");
     const modalDescripcion = modal.querySelector("p");
+        // --- Modal de Charola (carrusel) ---
+    const modalCharola = document.getElementById("modal-charola");
+    const btnCharola = document.querySelector(".btn-charola");
+    const cerrarCharola = document.getElementById("cerrarCharola");
+
+    // pasos
+    const pasoFrutas = document.getElementById("paso-frutas");
+    const pasoTopping = document.getElementById("paso-topping");
+
+    // formularios
+    const formFrutas = document.getElementById("form-charola-frutas");
+    const formTopping = document.getElementById("form-charola-topping");
+
+    // botones
+    const btnSiguienteFrutas = document.getElementById("btn-siguiente-frutas");
+    const btnAddCharola = document.getElementById("btn-add-charola");
+
+    // error
+    const errorFrutas = document.getElementById("error-charola-frutas");
+
+    let frutasSeleccionadas = [];
+
+    // abrir modal
+    btnCharola.addEventListener("click", () => {
+      modalCharola.style.display = "flex";
+      // resetear pasos
+      pasoFrutas.style.display = "block";
+      pasoTopping.style.display = "none";
+      formFrutas.reset();
+      formTopping.reset();
+      btnSiguienteFrutas.classList.add("btn-disabled");
+      errorFrutas.style.display = "none";
+      btnAddCharola.textContent = "Añadir - $40"; // reset precio base
+    });
+
+    // cerrar modal
+    cerrarCharola.addEventListener("click", () => modalCharola.style.display = "none");
+    window.addEventListener("click", (e) => {
+      if (e.target === modalCharola) modalCharola.style.display = "none";
+    });
+
+    // habilitar botón siguiente cuando hay 3 frutas
+    formFrutas.addEventListener("change", () => {
+      const seleccionadas = formFrutas.querySelectorAll("input[name='fruta']:checked");
+      if (seleccionadas.length === 3) {
+        btnSiguienteFrutas.classList.remove("btn-disabled");
+        errorFrutas.style.display = "none";
+      } else {
+        btnSiguienteFrutas.classList.add("btn-disabled");
+      }
+    });
+
+    // ir al paso de toppings
+    btnSiguienteFrutas.addEventListener("click", () => {
+      frutasSeleccionadas = Array.from(
+        formFrutas.querySelectorAll("input[name='fruta']:checked")
+      ).map(input => input.value);
+
+      if (frutasSeleccionadas.length !== 3) {
+        errorFrutas.style.display = "block";
+        return;
+      }
+
+      pasoFrutas.style.display = "none";
+      pasoTopping.style.display = "block";
+    });
+
+    // actualizar precio dinámicamente al seleccionar toppings
+    formTopping.addEventListener("change", (e) => {
+      const checkNinguno = formTopping.querySelector("input[value='Ninguno']");
+
+      if (e.target.value === "Ninguno" && e.target.checked) {
+        // Si selecciona "Ninguno", desmarcar todos los demás
+        formTopping.querySelectorAll("input[name='topping']").forEach(input => {
+          if (input.value !== "Ninguno") input.checked = false;
+        });
+      } else if (e.target.value !== "Ninguno" && e.target.checked) {
+        // Si selecciona otro, desmarcar "Ninguno"
+        checkNinguno.checked = false;
+      }
+
+      // Calcular precio
+      const seleccionados = Array.from(
+        formTopping.querySelectorAll("input[name='topping']:checked")
+      ).filter(input => input.value !== "Ninguno").length;
+
+      let precio = 40;
+      if (seleccionados > 1) {
+        precio += (seleccionados - 1) * 2; // cobra a partir del 2do
+      }
+
+      btnAddCharola.textContent = `Añadir - $${precio}`;
+    });
+
+        // --- Modal Con Crema (En vaso) ---
+    const modalVaso = document.getElementById("modal-vaso");
+    const cerrarVaso = document.getElementById("cerrarVaso");
+
+    // pasos
+    const pasoTamano = document.getElementById("paso-tamano");
+    const pasoToppingVaso = document.getElementById("paso-topping-vaso");
+
+    // formularios
+    const formTamano = document.getElementById("form-vaso-tamano");
+    const formToppingVaso = document.getElementById("form-vaso-topping");
+
+    // botones
+    const btnSiguienteTamano = document.getElementById("btn-siguiente-tamano");
+    const btnAddVaso = document.getElementById("btn-add-vaso");
+
+    // textos dinámicos
+    const tituloVaso = document.getElementById("titulo-vaso");
+    const errorTamano = document.getElementById("error-vaso-tamano");
+
+    let productoSeleccionado = null;
+    let precioBase = 0;
+
+    // Abrir modal de vaso (desde botones .btn-agregar de productos Con Crema en vaso)
+    document.querySelectorAll(".btn-agregar[data-tipo='vaso']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        productoSeleccionado = btn.dataset.producto;
+        tituloVaso.textContent = productoSeleccionado;
+
+        // Reset
+        pasoTamano.style.display = "block";
+        pasoToppingVaso.style.display = "none";
+        formTamano.innerHTML = "";
+        formToppingVaso.reset();
+        btnSiguienteTamano.classList.add("btn-disabled");
+        btnAddVaso.textContent = "Añadir";
+
+        // Cargar tamaños disponibles de ese producto
+        if (preciosConCrema[productoSeleccionado]) {
+          Object.entries(preciosConCrema[productoSeleccionado]).forEach(([tam, precio]) => {
+            const label = document.createElement("label");
+            label.innerHTML = `<input type="radio" name="tamano" value="${tam}" data-precio="${precio}"> ${tam} - $${precio}`;
+            formTamano.appendChild(label);
+            formTamano.appendChild(document.createElement("br"));
+          });
+        }
+
+        modalVaso.style.display = "flex";
+      });
+    });
+
+    // cerrar modal
+    cerrarVaso.addEventListener("click", () => modalVaso.style.display = "none");
+    window.addEventListener("click", (e) => {
+      if (e.target === modalVaso) modalVaso.style.display = "none";
+    });
+
+    // habilitar botón siguiente al elegir tamaño
+    formTamano.addEventListener("change", () => {
+      const seleccionado = formTamano.querySelector("input[name='tamano']:checked");
+      if (seleccionado) {
+        btnSiguienteTamano.classList.remove("btn-disabled");
+        errorTamano.style.display = "none";
+      }
+    });
+
+    // ir a paso toppings
+    btnSiguienteTamano.addEventListener("click", () => {
+      const seleccionado = formTamano.querySelector("input[name='tamano']:checked");
+      if (!seleccionado) {
+        errorTamano.style.display = "block";
+        return;
+      }
+      precioBase = parseInt(seleccionado.dataset.precio);
+
+      pasoTamano.style.display = "none";
+      pasoToppingVaso.style.display = "block";
+
+      btnAddVaso.textContent = `Añadir - $${precioBase}`;
+    });
+
+    // lógica de "Ninguno" + precio dinámico
+    formToppingVaso.addEventListener("change", (e) => {
+      const checkNinguno = formToppingVaso.querySelector("input[value='Ninguno']");
+
+      if (e.target.value === "Ninguno" && e.target.checked) {
+        formToppingVaso.querySelectorAll("input[name='topping']").forEach(input => {
+          if (input.value !== "Ninguno") input.checked = false;
+        });
+      } else if (e.target.value !== "Ninguno" && e.target.checked) {
+        checkNinguno.checked = false;
+      }
+
+      const seleccionados = Array.from(
+        formToppingVaso.querySelectorAll("input[name='topping']:checked")
+      ).filter(input => input.value !== "Ninguno").length;
+
+      let precio = precioBase;
+      if (seleccionados > 1) {
+        precio += (seleccionados - 1) * 2;
+      }
+      btnAddVaso.textContent = `Añadir - $${precio}`;
+    });
+
+    // añadir al carrito
+    btnAddVaso.addEventListener("click", () => {
+      const tamSeleccionado = formTamano.querySelector("input[name='tamano']:checked");
+      if (!tamSeleccionado) {
+        errorTamano.style.display = "block";
+        return;
+      }
+
+      const toppingsSeleccionados = Array.from(
+        formToppingVaso.querySelectorAll("input[name='topping']:checked")
+      ).map(input => input.value);
+
+      const toppingsFinal = toppingsSeleccionados.length > 0 ? toppingsSeleccionados : ["Ninguno"];
+      const toppingsValidos = toppingsSeleccionados.filter(t => t !== "Ninguno");
+
+      let precio = precioBase;
+      if (toppingsValidos.length > 1) {
+        precio += (toppingsValidos.length - 1) * 2;
+      }
+
+      const nombre = `${productoSeleccionado} ${tamSeleccionado.value} + Toppings: ${toppingsFinal.join(", ")}`;
+      agregarAlCarrito(nombre, precio);
+
+      modalVaso.style.display = "none";
+    });
+
+    // añadir al carrito
+    btnAddCharola.addEventListener("click", () => {
+      const toppingsSeleccionados = Array.from(
+        formTopping.querySelectorAll("input[name='topping']:checked")
+      ).map(input => input.value);
+
+      const toppingsFinal = toppingsSeleccionados.length > 0 ? toppingsSeleccionados : ["Ninguno"];
+
+      // excluir "Ninguno" del cálculo
+      const toppingsValidos = toppingsSeleccionados.filter(t => t !== "Ninguno");
+
+      let precio = 40;
+      if (toppingsValidos.length > 1) {
+        precio += (toppingsValidos.length - 1) * 2;
+      }
+
+      const nombre = `Charola (${frutasSeleccionadas.join(", ")}) + Toppings: ${toppingsFinal.join(", ")}`;
+      agregarAlCarrito(nombre, precio);
+
+      modalCharola.style.display = "none";
+    });
 
     // --- Productos con tamaños ---
     const preciosConCrema = {
@@ -34,7 +279,6 @@ document.addEventListener("DOMContentLoaded", function() {
       "Durazno":{ "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
       "Manzana":{ "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
       "Zarzamora":{ "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-      "Mango": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
       "Con Yogurth": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
       "Lagrimitas": { "Ch.": 10, "Gr.": 15 },
       "Coffe": { "Ch.": 12, "Gr.": 15 }
@@ -207,10 +451,10 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".btn-agregar").forEach(btn => {
       btn.addEventListener("click", () => {
         const producto = btn.dataset.producto;
-
-        if (preciosConCrema[producto]) {
+        // --- Solo entran aquí los que NO son "En vaso"
+        if (preciosConCrema[producto] && !btn.dataset.tipo) {
           modalTitulo.textContent = producto;
-          modalDescripcion.textContent = "Elige un tamaño:";
+          modalDescripcion.textContent = "Selecciona un tamaño:";
           opcionesPrecio.innerHTML = "";
 
           Object.entries(preciosConCrema[producto]).forEach(([etiqueta, valor]) => {
@@ -225,7 +469,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
           modal.style.display = "flex";
         }
-
         else if (producto === "Agua") {
           modalTitulo.textContent = "Gelatina de Agua";
           modalDescripcion.textContent = "Elige un sabor:";

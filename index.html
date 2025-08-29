@@ -39,6 +39,107 @@
 
             <h1 id="con-crema" class="title">CON CREMA</h1>
             <h3>TODOS incluyen un topping a escoger, a partir de 2 se cobran $2 más</h3>
+            <!-- Sub-sección En Charola -->
+            <h2>En Charola</h2>
+            <div class="productos">
+            <div class="producto-item">
+                <img src="img/con_crema/char.png" alt="Charola de Frutas">
+                <div class="detalle">
+                <div class="titulo-precio">
+                    <h2>Charola de Frutas</h2>
+                    <span class="linea"></span>
+                    <span class="precio">$40</span>
+                </div>
+                <p>Incluye 3 frutas a elegir entre fresas, uvas, manzana, zarzamora y mango.</p>
+                <button class="btn-agregar btn-charola">Armar charola</button>
+                </div>
+            </div>
+            </div>
+            <!-- Modal especial para la charola (Carrusel de pasos) -->
+            <div id="modal-charola" class="modal">
+                <div class="modal-contenido">
+                    <span id="cerrarCharola" class="cerrar">&times;</span>
+
+                    <!-- Paso 1: Frutas -->
+                    <div id="paso-frutas" class="paso-charola">
+                        <h2>Armar Charola</h2>
+                        <p>Selecciona 3 frutas:</p>
+                        <form id="form-charola-frutas" class="form-opciones">
+                            <label><input type="checkbox" name="fruta" value="Fresas"> Fresas</label><br>
+                            <label><input type="checkbox" name="fruta" value="Uvas"> Uvas</label><br>
+                            <label><input type="checkbox" name="fruta" value="Manzana"> Manzana</label><br>
+                            <label><input type="checkbox" name="fruta" value="Zarzamora"> Zarzamora</label><br>
+                            <label><input type="checkbox" name="fruta" value="Durazno"> Durazno</label><br>
+                        </form>
+                        <button id="btn-siguiente-frutas" class="btn-agregar btn-disabled">Siguiente</button>
+                        <p id="error-charola-frutas" class="error-inline" style="display:none; margin-top:8px;">
+                            Debes escoger 3 opciones
+                        </p>
+                    </div>
+
+                    <!-- Paso 2: Toppings -->
+                    <div id="paso-topping" class="paso-charola" style="display:none;">
+                        <h2>Elige toppings (opcional)</h2>
+                        <div class="scroll-toppings">
+                            <form id="form-charola-topping" class="form-opciones">
+                                <label><input type="checkbox" name="topping" value="Kranky"> Kranky</label><br>
+                                <label><input type="checkbox" name="topping" value="Chispas de colores"> Chispas de colores</label><br>
+                                <label><input type="checkbox" name="topping" value="Chispas de chocolate"> Chispas de chocolate</label><br>
+                                <label><input type="checkbox" name="topping" value="Nuez"> Nuez</label><br>
+                                <label><input type="checkbox" name="topping" value="Pasas"> Pasas</label><br>
+                                <label><input type="checkbox" name="topping" value="Granola"> Granola</label><br>
+                                <label><input type="checkbox" name="topping" value="Canela"> Canela</label><br>
+                                <label><input type="checkbox" name="topping" value="Lechera"> Lechera</label><br>
+                                <label><input type="checkbox" name="topping" value="Chantilli"> Chantilli</label><br>
+                                <label><input type="checkbox" name="topping" value="Ninguno"> Ninguno</label><br>
+                            </form>
+                        </div>
+                        <button id="btn-add-charola" class="btn-agregar">Añadir - $40</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sub-sección En vaso -->
+            <h2>En Vaso</h2>
+            <!-- Modal Con Crema (En vaso) -->
+            <div id="modal-vaso" class="modal">
+                <div class="modal-contenido">
+                    <span id="cerrarVaso" class="cerrar">&times;</span>
+
+                    <!-- Paso 1: Tamaño -->
+                    <div id="paso-tamano" class="paso-vaso">
+                        <h2 id="titulo-vaso"></h2>
+                        <p>Selecciona un tamaño:</p>
+                        <form id="form-vaso-tamano" class="form-opciones">
+                            <!-- Botones generados dinámicamente según preciosConCrema -->
+                        </form>
+                        <button id="btn-siguiente-tamano" class="btn-agregar btn-disabled">Siguiente</button>
+                        <p id="error-vaso-tamano" class="error-inline" style="display:none; margin-top:8px;">
+                            Debes escoger un tamaño
+                        </p>
+                    </div>
+
+                    <!-- Paso 2: Toppings -->
+                    <div id="paso-topping-vaso" class="paso-vaso" style="display:none;">
+                        <h2>Elige toppings (opcional)</h2>
+                        <div class="scroll-toppings">
+                            <form id="form-vaso-topping" class="form-opciones">
+                                <label><input type="checkbox" name="topping" value="Kranky"> Kranky</label><br>
+                                <label><input type="checkbox" name="topping" value="Chispas de colores"> Chispas de colores</label><br>
+                                <label><input type="checkbox" name="topping" value="Chispas de chocolate"> Chispas de chocolate</label><br>
+                                <label><input type="checkbox" name="topping" value="Nuez"> Nuez</label><br>
+                                <label><input type="checkbox" name="topping" value="Pasas"> Pasas</label><br>
+                                <label><input type="checkbox" name="topping" value="Granola"> Granola</label><br>
+                                <label><input type="checkbox" name="topping" value="Canela"> Canela</label><br>
+                                <label><input type="checkbox" name="topping" value="Lechera"> Lechera</label><br>
+                                <label><input type="checkbox" name="topping" value="Chantilli"> Chantilli</label><br>
+                                <label><input type="checkbox" name="topping" value="Ninguno"> Ninguno</label><br>
+                            </form>
+                    </div>
+                    <button id="btn-add-vaso" class="btn-agregar">Añadir</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Bloque de precios múltiples -->
             <div class="precios-multiples">
@@ -67,7 +168,7 @@
                         <div class="titulo-precio">
                             <h2>Fresas</h2>
                             <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Fresas">Agregar</button>
+                            <button class="btn-agregar" data-producto="Fresas" data-tipo="vaso">Agregar</button>
                         </div>
                         <p>Deliciosas fresas cubiertas de receta secreta.</p>
                     </div>
@@ -78,7 +179,7 @@
                         <div class="titulo-precio">
                             <h2>Uvas</h2>
                             <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Uvas">Agregar</button>
+                            <button class="btn-agregar" data-producto="Uvas" data-tipo="vaso">Agregar</button>
                         </div>
                         <p>Uvas de calidad, escogidas con amor por D'eli.</p>
                     </div>
@@ -89,7 +190,7 @@
                         <div class="titulo-precio">
                             <h2>Durazno</h2>
                             <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Durazno">Agregar</button>
+                            <button class="btn-agregar" data-producto="Durazno" data-tipo="vaso">Agregar</button>
                         </div>
                         <p>Corte de duraznos finos, entregados para alguien con el mismo adjetivo.</p>
                     </div>
@@ -100,7 +201,7 @@
                         <div class="titulo-precio">
                             <h2>Manzana</h2>
                             <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Manzana">Agregar</button>
+                            <button class="btn-agregar" data-producto="Manzana" data-tipo="vaso">Agregar</button>
                         </div>
                         <p>Por qué esperar fiestas de diciembre, los placeres de la ensalada de manzana comienzan hoy.</p>
                     </div>
@@ -111,20 +212,9 @@
                         <div class="titulo-precio">
                             <h2>Zarzamora</h2>
                             <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Zarzamora">Agregar</button>
+                            <button class="btn-agregar" data-producto="Zarzamora" data-tipo="vaso">Agregar</button>
                         </div>
                         <p>Un postre peculiar con un sabor inigualable gracias a la calidad de la zarzamora.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/con_crema/mangos.png" alt="Mango">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Mango</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Mango">Agregar</button>
-                        </div>
-                        <p>No hay más qué decir de la fruta elegida para el cliente elegido.</p>
                     </div>
                 </div>
             </div>
