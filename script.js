@@ -256,12 +256,12 @@ document.addEventListener("DOMContentLoaded", function() {
       const numero = "525561037319"; // número de la tienda
       const orden = generarOrden();
 
-      let mensaje = `Orden #${orden}\n`;
+      let mensaje = `Orden #${orden}\r\n`;
       let total = 0;
 
       carrito.forEach((item, i) => {
         let subtotal = item.precio * item.cantidad;
-        mensaje += `${i+1}. ${item.nombre} $${item.precio} x${item.cantidad}\n`;
+        mensaje += `${i+1}. ${item.nombre} $${item.precio} x${item.cantidad}\r\n`;
         total += subtotal;
       });
 
