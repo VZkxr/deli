@@ -583,4 +583,5 @@ h2{
 .form-opciones input[type="radio"] {
   margin: 0;                     /* quita espacio extra */
   transform: scale(1.1);         /* opcional: agranda un poco */
+  accent-color: var(--colorPrimario);
 }
