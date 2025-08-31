@@ -163,7 +163,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const label = document.createElement("label");
             label.innerHTML = `<input type="radio" name="tamano" value="${tam}" data-precio="${precio}"> ${tam} - $${precio}`;
             formTamano.appendChild(label);
-            formTamano.appendChild(document.createElement("br"));
           });
         }
 
@@ -177,7 +176,6 @@ document.addEventListener("DOMContentLoaded", function() {
       if (e.target === modalVaso) modalVaso.style.display = "none";
     });
 
-    // habilitar botón siguiente al elegir tamaño
     formTamano.addEventListener("change", () => {
       const seleccionado = formTamano.querySelector("input[name='tamano']:checked");
       if (seleccionado) {
@@ -281,7 +279,8 @@ document.addEventListener("DOMContentLoaded", function() {
       "Zarzamora":{ "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
       "Con Yogurth": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
       "Lagrimitas": { "Ch.": 10, "Gr.": 15 },
-      "Coffe": { "Ch.": 12, "Gr.": 15 }
+      "Coffe": { "Ch.": 12, "Gr.": 15 },
+      "Arroz con Leche": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
     };
 
     // --- Producto con sabores (De Agua) ---

@@ -558,3 +558,29 @@ h2{
   transition: opacity 0.25s ease, transform 0.2s ease;
   opacity: 1;
 }
+/* Opciones tipo formulario */
+.form-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Cada opción (label) como recuadro rosa */
+.form-opciones label {
+  display: flex;
+  align-items: center;
+  gap: 8px;                      /* espacio entre checkbox y texto */
+  background: var(--colorPrimario);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Checkbox tamaño normal, alineado a la izquierda */
+.form-opciones input[type="checkbox"],
+.form-opciones input[type="radio"] {
+  margin: 0;                     /* quita espacio extra */
+  transform: scale(1.1);         /* opcional: agranda un poco */
+}
