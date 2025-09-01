@@ -120,6 +120,15 @@ document.addEventListener("DOMContentLoaded", function() {
       btnAddCharola.textContent = `Añadir - $${precio}`;
     });
 
+    const modalRebanadas = document.getElementById("modal-rebanadas");
+    const cerrarRebanadas = document.getElementById("cerrarRebanadas");
+    const tituloRebanadas = document.getElementById("titulo-rebanadas");
+    const btnLecheraSi = document.getElementById("btn-lechera-si");
+    const btnLecheraNo = document.getElementById("btn-lechera-no");
+
+    let productoRebanada = null;
+    let precioRebanada = 0;
+
         // --- Modal Con Crema (En vaso) ---
     const modalVaso = document.getElementById("modal-vaso");
     const cerrarVaso = document.getElementById("cerrarVaso");
@@ -488,8 +497,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
         else if (preciosFijos[producto]) {
           const precio = preciosFijos[producto];
-          agregarAlCarrito(producto, precio);
+
+          // Detectar si es rebanada
+          if (["Flan Napolitano", "Pay de Limón", "Pastel Imposible", "Pastel de Chocolate", "Pastel de Beso de Angel"].includes(producto)) {
+            productoRebanada = producto;
+            precioRebanada = precio;
+            tituloRebanadas.textContent = producto;
+            modalRebanadas.style.display = "flex";
+          } else {
+            agregarAlCarrito(producto, precio);
+          }
         }
+
+        btnLecheraSi.addEventListener("click", () => {
+          agregarAlCarrito(`${productoRebanada} + Lechera`, precioRebanada);
+          modalRebanadas.style.display = "none";
+        });
+
+        btnLecheraNo.addEventListener("click", () => {
+          agregarAlCarrito(productoRebanada, precioRebanada);
+          modalRebanadas.style.display = "none";
+        });
+        cerrarRebanadas.addEventListener("click", () => modalRebanadas.style.display = "none");
+        window.addEventListener("click", (e) => {
+          if (e.target === modalRebanadas) modalRebanadas.style.display = "none";
+        });
       });
     });
 

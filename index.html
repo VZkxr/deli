@@ -36,6 +36,13 @@
         <div class="content">
             <img src="img/slide_3.png" alt="">
             <h1 class="text-center slogan">Los D'eliciosos y caseros de Cuautepec</h1>
+            <p class="text-center">
+                <a href="https://www.google.com/maps/place/D'Eli+Postres+Yummi/@19.5367456,-99.1417125,21z/data=!4m6!3m5!1s0x85d1f76973e94b59:0x59080389d38a5324!8m2!3d19.536883!4d-99.1414609!16s%2Fg%2F11xt418svv?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D" 
+                    target="_blank" 
+                    style="color: var(--colorPrimario); font-weight: bold; text-decoration: underline;">
+                    📍 Av del Castillo, El Arbolillo, 07240 CDMX, Cuautepec de Madero.
+                </a>
+            </p>
 
             <h1 id="con-crema" class="title">CON CREMA</h1>
             <h3>TODOS incluyen un topping a escoger, a partir de 2 se cobran $2 más</h3>
@@ -50,7 +57,7 @@
                     <span class="linea"></span>
                     <span class="precio">$40</span>
                 </div>
-                <p>Incluye 3 frutas a elegir entre fresas, uvas, manzana, zarzamora y mango.</p>
+                <p>Incluye 3 productos a elegir entre fresas, uvas, manzana, zarzamora, durazno y gelatina con yogurth.</p>
                 <button class="btn-agregar btn-charola">Armar charola</button>
                 </div>
             </div>
@@ -63,7 +70,7 @@
                     <!-- Paso 1: Frutas -->
                     <div id="paso-frutas" class="paso-charola">
                         <h2>Armar Charola</h2>
-                        <p>Selecciona 3 frutas:</p>
+                        <p>Selecciona 3 productos:</p>
                         <form id="form-charola-frutas" class="form-opciones">
                             <label>
                                 <input type="checkbox" name="fruta" value="Fresas"> 
@@ -84,6 +91,10 @@
                             <label>
                                 <input type="checkbox" name="fruta" value="Durazno">
                                 <span>Durazno</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="fruta" value="Gelatina con yogurth">
+                                <span>Gelatina con yogurth</span>
                             </label>
                         </form>
                         <button id="btn-siguiente-frutas" class="btn-agregar btn-disabled">Siguiente</button>
@@ -347,6 +358,18 @@
                 </div>
             </div>
             <h1 id="rebanadas" class="title">REBANADAS</h1>
+            <!-- Modal para Rebanadas -->
+            <div id="modal-rebanadas" class="modal">
+                <div class="modal-contenido">
+                    <span id="cerrarRebanadas" class="cerrar">&times;</span>
+                    <h2 id="titulo-rebanadas"></h2>
+                    <p>¿Agregar Lechera?</p>
+                    <div class="opciones-precio">
+                    <button id="btn-lechera-si">Sí</button>
+                    <button id="btn-lechera-no">No</button>
+                    </div>
+                </div>
+            </div>
 
             <div class="productos">
                 <div class="producto-item">
