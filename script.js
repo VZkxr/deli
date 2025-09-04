@@ -508,21 +508,23 @@ document.addEventListener("DOMContentLoaded", function() {
             agregarAlCarrito(producto, precio);
           }
         }
-
-        btnLecheraSi.addEventListener("click", () => {
-          agregarAlCarrito(`${productoRebanada} + Lechera`, precioRebanada);
-          modalRebanadas.style.display = "none";
-        });
-
-        btnLecheraNo.addEventListener("click", () => {
-          agregarAlCarrito(productoRebanada, precioRebanada);
-          modalRebanadas.style.display = "none";
-        });
-        cerrarRebanadas.addEventListener("click", () => modalRebanadas.style.display = "none");
-        window.addEventListener("click", (e) => {
-          if (e.target === modalRebanadas) modalRebanadas.style.display = "none";
-        });
       });
+    });
+
+    // Eventos del modal Rebanadas (solo una vez)
+    btnLecheraSi.addEventListener("click", () => {
+      agregarAlCarrito(`${productoRebanada} + Lechera`, precioRebanada);
+      modalRebanadas.style.display = "none";
+    });
+
+    btnLecheraNo.addEventListener("click", () => {
+      agregarAlCarrito(productoRebanada, precioRebanada);
+      modalRebanadas.style.display = "none";
+    });
+
+    cerrarRebanadas.addEventListener("click", () => modalRebanadas.style.display = "none");
+      window.addEventListener("click", (e) => {
+        if (e.target === modalRebanadas) modalRebanadas.style.display = "none";
     });
 
     // --- Enviar pedido por WhatsApp ---
