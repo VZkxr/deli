@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "Tres Leches de Durazno": 28,
       "Flan Casero de Vainilla": 15,
       "Flan Napolitano": 30,
-      "Pay de Limón": 40,
+      "Pay de Limón": 45,
       "Pastel Imposible": 45,
       "Pastel de Chocolate": 45,
       "Pastel de Beso de Angel": 50,
