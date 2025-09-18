@@ -4,6 +4,10 @@
     --colorComplementario:#80064A;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body{
     background: url(img/bg.jpg);
     font-family: Arial, Helvetica, sans-serif;
