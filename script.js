@@ -432,9 +432,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Sobrescribimos agregarAlCarrito
       function agregarAlCarrito(nombre, precio, esCremaVellana = false) {
-        // Ajustamos el nombre si corresponde
         if (esCremaVellana) {
-          nombre += " (Con Crema-vellana)";
+          // Si el nombre trae toppings, insertamos "(Con Crema-vellana)" justo antes de " + Toppings"
+          if (nombre.includes("+ Toppings")) {
+            nombre = nombre.replace(" + Toppings", " (Con Crema-vellana) + Toppings");
+          } else {
+            // Si no trae toppings, lo dejamos al final del producto/tamaño
+            nombre += " (Con Crema-vellana)";
+          }
         }
 
         const existente = carrito.find(item => item.nombre === nombre && item.precio === precio);
