@@ -43,6 +43,12 @@
                     📍 Av del Castillo, El Arbolillo, 07240 CDMX, Cuautepec de Madero.
                 </a>
             </p>
+            <p class="text-center">
+                <a  target="_blank" 
+                    style="color: var(--colorPrimario); font-weight: bold; font-size: 0.8rem;">
+                    Algunas imágenes son ilustrativas
+                </a>
+            </p>
 
             <h1 id="con-crema" class="title">CON CREMA</h1>
             <h3>TODOS incluyen un topping a escoger, a partir de 2 se cobran $2 más</h3>
@@ -155,7 +161,7 @@
                 </div>
             </div>
             
-            <!-- Sub-sección En vaso -->
+            <!-- ================ SUB-SECCIÓN EN VASO ================ --> 
             <h2>En Vaso</h2>
             <!-- Modal Con Crema (En vaso) -->
             <div id="modal-vaso" class="modal">
@@ -305,6 +311,155 @@
                 </div>
             </div>
 
+            <!-- ================ SUB-SECCIÓN CREMA-VELLANA ================ --> 
+             <h2>En Vaso (Recubierto de Crema-Vellana)</h2>
+            <!-- Modal Con Crema (En vaso) -->
+            <div id="modal-vaso" class="modal">
+                <div class="modal-contenido">
+                    <span id="cerrarVaso" class="cerrar">&times;</span>
+
+                    <!-- Paso 1: Tamaño -->
+                    <div id="paso-tamano" class="paso-vaso">
+                        <h2 id="titulo-vaso"></h2>
+                        <p>Selecciona un tamaño:</p>
+                        <form id="form-vaso-tamano" class="form-opciones">
+                            <!-- Botones generados dinámicamente según preciosConCrema -->
+                        </form>
+                        <button id="btn-siguiente-tamano" class="btn-agregar btn-disabled">Siguiente</button>
+                        <p id="error-vaso-tamano" class="error-inline" style="display:none; margin-top:8px;">
+                            Debes escoger un tamaño
+                        </p>
+                    </div>
+
+                    <!-- Paso 2: Toppings -->
+                    <div id="paso-topping-vaso" class="paso-vaso" style="display:none;">
+                        <h2>Elige toppings (opcional)</h2>
+                        <div class="scroll-toppings">
+                            <form id="form-vaso-topping" class="form-opciones">
+                                <label>
+                                    <input type="checkbox" name="topping" value="Kranky">
+                                    <span>Kranky</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Chispas de colores">
+                                    <span>Chispas de colores</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Chispas de chocolate"> 
+                                    <span>Chispas de chocolate</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Nuez"> 
+                                    <span>Nuez</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Pasas"> 
+                                    <span>Pasas</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Granola"> 
+                                    <span>Granola</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Canela">
+                                    <span>Canela</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Lechera">
+                                    <span>Lechera</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Chantilli"> 
+                                    <span>Chantilli</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="topping" value="Ninguno"> 
+                                    <span>Ninguno</span>
+                                </label>
+                            </form>
+                        </div>
+                        <button id="btn-add-vaso" class="btn-agregar">Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque de precios múltiples -->
+            <div class="precios-multiples">
+                <div class="precio-item">
+                    <span class="etiqueta">Med.</span>
+                    <span class="precio">$45</span>
+                </div>
+                <div class="precio-item">
+                    <span class="etiqueta">Gr.</span>
+                    <span class="precio">$55</span>
+                </div>
+                <div class="precio-item">
+                    <span class="etiqueta">1/2</span>
+                    <span class="precio">$95</span>
+                </div>
+            </div>
+
+            <div class="productos">
+                <div class="producto-item">
+                    <img src="img/vellana/fresas.png" alt="Fresas">
+                    <div class="detalle">
+                        <div class="titulo-precio">
+                            <h2>Fresas</h2>
+                            <span class="linea"></span>
+                            <button class="btn-agregar" data-tipo="vellana" data-producto="Fresas">Agregar</button>
+                        </div>
+                        <p>Deliciosas fresas cubiertas de receta secreta.</p>
+                    </div>
+                </div>
+                <div class="producto-item">
+                    <img src="img/vellana/uvas.png" alt="Uvas">
+                    <div class="detalle">
+                        <div class="titulo-precio">
+                            <h2>Uvas</h2>
+                            <span class="linea"></span>
+                            <button class="btn-agregar" data-tipo="vellana" data-producto="Uvas">Agregar</button>
+                        </div>
+                        <p>Uvas de calidad, escogidas con amor por D'eli.</p>
+                    </div>
+                </div>
+                <div class="producto-item">
+                    <img src="img/vellana/duraznos.png" alt="Durazno">
+                    <div class="detalle">
+                        <div class="titulo-precio">
+                            <h2>Durazno</h2>
+                            <span class="linea"></span>
+                            <button class="btn-agregar" data-tipo="vellana" data-producto="Durazno">Agregar</button>
+                        </div>
+                        <p>Corte de duraznos finos, entregados para alguien con el mismo adjetivo.</p>
+                    </div>
+                </div>
+                <div class="producto-item">
+                    <img src="img/vellana/manzana.png" alt="Manzana">
+                    <div class="detalle">
+                        <div class="titulo-precio">
+                            <h2>Manzana</h2>
+                            <span class="linea"></span>
+                            <button class="btn-agregar" data-tipo="vellana" data-producto="Manzana">Agregar</button>
+                        </div>
+                        <p>Por qué esperar fiestas de diciembre, los placeres de la ensalada de manzana comienzan hoy.</p>
+                    </div>
+                </div>
+                <div class="producto-item">
+                    <img src="img/vellana/zarzamoras.png" alt="Zarzamora">
+                    <div class="detalle">
+                        <div class="titulo-precio">
+                            <h2>Zarzamora</h2>
+                            <span class="linea"></span>
+                            <button class="btn-agregar" data-tipo="vellana" data-producto="Zarzamora">Agregar</button>
+                        </div>
+                        <p>Un postre peculiar con un sabor inigualable gracias a la calidad de la zarzamora.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- =================================================== -->
+            <!-- ================ SECCIÓN GELATINAS ================ --> 
+            <!-- =================================================== --> 
             <h1 id="gelatinas" class="title">GELATINAS</h1>
 
             <div class="productos">

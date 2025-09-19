@@ -152,32 +152,37 @@ document.addEventListener("DOMContentLoaded", function() {
     let productoSeleccionado = null;
     let precioBase = 0;
 
-    // Abrir modal de vaso (desde botones .btn-agregar de productos Con Crema en vaso)
-    document.querySelectorAll(".btn-agregar[data-tipo='vaso']").forEach(btn => {
-      btn.addEventListener("click", () => {
-        productoSeleccionado = btn.dataset.producto;
-        tituloVaso.textContent = productoSeleccionado;
+    // Abrir modal de vaso (con crema o vellana)
+    document.querySelectorAll(".btn-agregar[data-tipo='vaso'], .btn-agregar[data-tipo='vellana']")
+      .forEach(btn => {
+        btn.addEventListener("click", () => {
+          productoSeleccionado = btn.dataset.producto;
+          const tipo = btn.dataset.tipo; // <-- aquí detectamos si es vaso o vellana
+          tituloVaso.textContent = productoSeleccionado;
 
-        // Reset
-        pasoTamano.style.display = "block";
-        pasoToppingVaso.style.display = "none";
-        formTamano.innerHTML = "";
-        formToppingVaso.reset();
-        btnSiguienteTamano.classList.add("btn-disabled");
-        btnAddVaso.textContent = "Añadir";
+          // Reset
+          pasoTamano.style.display = "block";
+          pasoToppingVaso.style.display = "none";
+          formTamano.innerHTML = "";
+          formToppingVaso.reset();
+          btnSiguienteTamano.classList.add("btn-disabled");
+          btnAddVaso.textContent = "Añadir";
 
-        // Cargar tamaños disponibles de ese producto
-        if (preciosConCrema[productoSeleccionado]) {
-          Object.entries(preciosConCrema[productoSeleccionado]).forEach(([tam, precio]) => {
-            const label = document.createElement("label");
-            label.innerHTML = `<input type="radio" name="tamano" value="${tam}" data-precio="${precio}"> ${tam} - $${precio}`;
-            formTamano.appendChild(label);
-          });
-        }
+          // Cargar precios según tipo
+          const listaPrecios = (tipo === "vellana") ? preciosVellana : preciosConCrema;
 
-        modalVaso.style.display = "flex";
+          if (listaPrecios[productoSeleccionado]) {
+            Object.entries(listaPrecios[productoSeleccionado]).forEach(([tam, precio]) => {
+              const label = document.createElement("label");
+              label.innerHTML = `<input type="radio" name="tamano" value="${tam}" data-precio="${precio}"> ${tam} - $${precio}`;
+              formTamano.appendChild(label);
+            });
+          }
+
+          modalVaso.style.display = "flex";
+        });
       });
-    });
+
 
     // cerrar modal
     cerrarVaso.addEventListener("click", () => modalVaso.style.display = "none");
@@ -291,6 +296,14 @@ document.addEventListener("DOMContentLoaded", function() {
       "Coffe": { "Ch.": 12, "Gr.": 15 },
       "Arroz con Leche": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
     };
+
+    const preciosVellana = {
+      "Fresas": { "Med.": 45, "Gr.": 55, "1/2": 95 },
+      "Durazno":{ "Med.": 45, "Gr.": 55, "1/2": 95 },
+      "Uvas":   { "Med.": 45, "Gr.": 55, "1/2": 95 },
+      "Manzana":{ "Med.": 45, "Gr.": 55, "1/2": 95 },
+      "Zarzamora":{ "Med.": 45, "Gr.": 55, "1/2": 95 },
+    }
 
     // --- Producto con sabores (De Agua) ---
     const saboresAgua = {
