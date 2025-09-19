@@ -151,13 +151,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let productoSeleccionado = null;
     let precioBase = 0;
+    let tipoVasoSeleccionado = null;
 
     // Abrir modal de vaso (con crema o vellana)
     document.querySelectorAll(".btn-agregar[data-tipo='vaso'], .btn-agregar[data-tipo='vellana']")
       .forEach(btn => {
         btn.addEventListener("click", () => {
           productoSeleccionado = btn.dataset.producto;
-          const tipo = btn.dataset.tipo; // <-- aquí detectamos si es vaso o vellana
+          const tipo = btn.dataset.tipo || 'vaso';
+          tipoVasoSeleccionado = tipo; // <-- guardamos el origen (vaso o vellana)
           tituloVaso.textContent = productoSeleccionado;
 
           // Reset
@@ -185,9 +187,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // cerrar modal
-    cerrarVaso.addEventListener("click", () => modalVaso.style.display = "none");
+    cerrarVaso.addEventListener("click", () => {
+      modalVaso.style.display = "none";
+      tipoVasoSeleccionado = null;
+    });
     window.addEventListener("click", (e) => {
-      if (e.target === modalVaso) modalVaso.style.display = "none";
+      if (e.target === modalVaso) {
+        modalVaso.style.display = "none";
+        tipoVasoSeleccionado = null;
+      }
     });
 
     formTamano.addEventListener("change", () => {
@@ -256,11 +264,17 @@ document.addEventListener("DOMContentLoaded", function() {
         precio += (toppingsValidos.length - 1) * 2;
       }
 
-      const nombre = `${productoSeleccionado} ${tamSeleccionado.value} + Toppings: ${toppingsFinal.join(", ")}`;
-      agregarAlCarrito(nombre, precio);
+      // detectar si el modal actual fue abierto desde la sección "vellana"
+      const esVellana = tipoVasoSeleccionado === 'vellana';
 
+      const nombre = `${productoSeleccionado} ${tamSeleccionado.value} + Toppings: ${toppingsFinal.join(", ")}`;
+      agregarAlCarrito(nombre, precio, esVellana);
+
+      // cerrar y resetear
       modalVaso.style.display = "none";
+      tipoVasoSeleccionado = null;
     });
+
 
     // añadir al carrito
     btnAddCharola.addEventListener("click", () => {
@@ -416,25 +430,30 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById("btn-carrito-text").textContent = `Ver carrito (${items})`;
     }
 
-    // Sobrescribimos agregarAlCarrito
-    function agregarAlCarrito(nombre, precio) {
-      const existente = carrito.find(item => item.nombre === nombre && item.precio === precio);
-      if (existente) {
-        existente.cantidad++;
-      } else {
-        carrito.push({ nombre, precio, cantidad: 1 });
+      // Sobrescribimos agregarAlCarrito
+      function agregarAlCarrito(nombre, precio, esCremaVellana = false) {
+        // Ajustamos el nombre si corresponde
+        if (esCremaVellana) {
+          nombre += " (Con Crema-vellana)";
+        }
+
+        const existente = carrito.find(item => item.nombre === nombre && item.precio === precio);
+        if (existente) {
+          existente.cantidad++;
+        } else {
+          carrito.push({ nombre, precio, cantidad: 1 });
+        }
+
+        // Activar botones
+        btnEnviar.disabled = false;
+        btnCarrito.disabled = false;
+
+        // Actualizar UI del carrito
+        actualizarCarritoUI();
+
+        // Toast
+        mostrarToast();
       }
-
-      // Activar botones
-      btnEnviar.disabled = false;
-      btnCarrito.disabled = false;
-
-      // Actualizar UI del carrito
-      actualizarCarritoUI();
-
-      // Toast
-      mostrarToast();
-    }
 
     // --- Botón Ver carrito ---
     btnCarrito.addEventListener("click", () => {
