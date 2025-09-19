@@ -374,7 +374,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Botón eliminar (ícono de basura)
         const btnEliminar = document.createElement("button");
         btnEliminar.className = "btn-eliminar";
-        btnEliminar.innerHTML = `<img src="img/trash.svg" class="btn-eliminar"/>`;
+        btnEliminar.innerHTML = `<img src="img/trash.svg" alt="btn-eliminar"/>`;
         btnEliminar.addEventListener("click", () => {
           carrito.splice(i, 1);
           if (carrito.length === 0) {
@@ -439,7 +439,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Generador de número de orden
     function generarOrden() {
-      return Math.floor(1000 + Math.random() * 9000); // Ej: 1234
+      const now = new Date();
+      return `${now.getFullYear()}${now.getMonth()+1}${now.getDate()}-${now.getHours()}${now.getMinutes()}${now.getSeconds()}`;
     }
 
         // --- Mostrar toast "Agregado!" ---
