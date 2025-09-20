@@ -312,11 +312,11 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     const preciosVellana = {
-      "Fresas": { "Med.": 45, "Gr.": 55, "1/2": 95 },
-      "Durazno":{ "Med.": 45, "Gr.": 55, "1/2": 95 },
-      "Uvas":   { "Med.": 45, "Gr.": 55, "1/2": 95 },
-      "Manzana":{ "Med.": 45, "Gr.": 55, "1/2": 95 },
-      "Zarzamora":{ "Med.": 45, "Gr.": 55, "1/2": 95 },
+      "Fresas":   { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
+      "Durazno":  { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
+      "Uvas":     { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
+      "Manzana":  { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
+      "Zarzamora":{ "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
     }
 
     // --- Producto con sabores (De Agua) ---
