@@ -674,8 +674,73 @@
                     </div>
                 </div>
             </div>
+
+            <!-- =================================================== -->
+            <!-- ================ SECCIÓN ESPECIALES ================ --> 
+            <!-- =================================================== --> 
             <h1 id="especiales" class="title">ESPECIALES</h1>
-            <h2>Ups! Hoy no contamos con especiales</h2>
+            <div class="productos">
+                <div class="producto-item">
+                    <img src="img/especiales/pan_muerto.png" alt="Pan de muerto relleno">
+                    <div class="detalle">
+                        <div class="titulo-precio">
+                            <h2>Pan de muerto relleno</h2>
+                            <span class="linea"></span>
+                            <span class="precio">$35</span>
+                        </div>
+                        <p>El delicioso pan tradicional, ahora bañado con tres leches.</p>
+                        <button class="btn-agregar" data-producto="Pan de Muerto Relleno" data-tipo="pan-muerto">Agregar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <h2>Ups! Hoy no contamos con especiales</h2> -->
+        </div>
+
+        <div id="modal-pan-muerto" class="modal">
+            <div class="modal-contenido">
+                <span id="cerrarPanMuerto" class="cerrar">×</span>
+
+                <div id="paso-pan-muerto-sabor" class="paso-pan-muerto">
+                    <h2>Pan de muerto relleno</h2>
+                    <p>Selecciona un sabor:</p>
+                    <form id="form-pan-muerto-sabor" class="form-opciones">
+                        <label>
+                            <input type="radio" name="sabor" value="Fresas con crema" data-precio="35"> 
+                            <span>Fresas con crema</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="sabor" value="Fresas con chocolate" data-precio="35">
+                            <span>Fresas con chocolate</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="sabor" value="Fresas con Philadelphia" data-precio="35">
+                            <span>Fresas con Philadelphia</span>
+                        </label>
+                    </form>
+                    <button id="btn-siguiente-sabor-pm" class="btn-agregar btn-disabled">Siguiente</button>
+                    <p id="error-pan-muerto-sabor" class="error-inline" style="display:none; margin-top:8px;">
+                        Debes escoger un sabor
+                    </p>
+                </div>
+
+                <div id="paso-pan-muerto-cobertura" class="paso-pan-muerto" style="display:none;">
+                    <h2>Elige la cobertura:</h2>
+                    <form id="form-pan-muerto-cobertura" class="form-opciones">
+                        <label>
+                            <input type="radio" name="cobertura" value="Lechera">
+                            <span>Lechera</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="cobertura" value="Chocolate">
+                            <span>Chocolate</span>
+                        </label>
+                    </form>
+                    <button id="btn-add-pan-muerto" class="btn-agregar btn-disabled">Añadir - $35</button>
+                    <p id="error-pan-muerto-cobertura" class="error-inline" style="display:none; margin-top:8px;">
+                        Debes escoger una cobertura
+                    </p>
+                </div>
+            </div>
         </div>
         <!-- //CONTENT-->
         <footer class="text-center">

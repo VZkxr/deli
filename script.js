@@ -275,6 +275,108 @@ document.addEventListener("DOMContentLoaded", function() {
       tipoVasoSeleccionado = null;
     });
 
+    // === PAN DE MUERTO RELLENO ===
+    const modalPanMuerto = document.getElementById("modal-pan-muerto");
+    const cerrarPanMuerto = document.getElementById("cerrarPanMuerto");
+
+    const pasoSaborPM = document.getElementById("paso-pan-muerto-sabor");
+    const pasoCoberturaPM = document.getElementById("paso-pan-muerto-cobertura");
+
+    const formSaborPM = document.getElementById("form-pan-muerto-sabor");
+    const formCoberturaPM = document.getElementById("form-pan-muerto-cobertura");
+
+    const btnSiguienteSaborPM = document.getElementById("btn-siguiente-sabor-pm");
+    const btnAddPanMuerto = document.getElementById("btn-add-pan-muerto");
+
+    const errorSaborPM = document.getElementById("error-pan-muerto-sabor");
+    const errorCoberturaPM = document.getElementById("error-pan-muerto-cobertura");
+
+    let saborSeleccionadoPM = null;
+    let precioBasePM = 35; // Precio fijo base
+
+    // Abrir modal de Pan de Muerto Relleno
+    document.querySelectorAll(".btn-agregar[data-tipo='pan-muerto']")
+      .forEach(btn => {
+        btn.addEventListener("click", () => {
+            // Reset
+            saborSeleccionadoPM = null;
+            pasoSaborPM.style.display = "block";
+            pasoCoberturaPM.style.display = "none";
+            formSaborPM.reset();
+            formCoberturaPM.reset();
+            btnSiguienteSaborPM.classList.add("btn-disabled");
+            btnAddPanMuerto.classList.add("btn-disabled"); // El botón Añadir debe estar deshabilitado hasta escoger cobertura
+            errorSaborPM.style.display = "none";
+            errorCoberturaPM.style.display = "none";
+
+            // Precio base siempre es $35
+            btnAddPanMuerto.textContent = `Añadir - $${precioBasePM}`;
+
+            modalPanMuerto.style.display = "flex";
+        });
+    });
+
+    // Cerrar modal
+    cerrarPanMuerto.addEventListener("click", () => modalPanMuerto.style.display = "none");
+    window.addEventListener("click", (e) => {
+      if (e.target === modalPanMuerto) modalPanMuerto.style.display = "none";
+    });
+
+    // --- PASO 1: SABOR ---
+    // Habilitar botón Siguiente cuando se selecciona un sabor
+    formSaborPM.addEventListener("change", () => {
+      const seleccionado = formSaborPM.querySelector("input[name='sabor']:checked");
+      if (seleccionado) {
+        btnSiguienteSaborPM.classList.remove("btn-disabled");
+        errorSaborPM.style.display = "none";
+      } else {
+        btnSiguienteSaborPM.classList.add("btn-disabled");
+      }
+    });
+
+    // Ir al paso de Cobertura
+    btnSiguienteSaborPM.addEventListener("click", () => {
+      const seleccionado = formSaborPM.querySelector("input[name='sabor']:checked");
+      if (!seleccionado) {
+        errorSaborPM.style.display = "block";
+        return;
+      }
+      saborSeleccionadoPM = seleccionado.value;
+
+      pasoSaborPM.style.display = "none";
+      pasoCoberturaPM.style.display = "block";
+    });
+
+    // --- PASO 2: COBERTURA + AÑADIR ---
+    // Habilitar botón Añadir cuando se selecciona una cobertura
+    formCoberturaPM.addEventListener("change", () => {
+        const seleccionado = formCoberturaPM.querySelector("input[name='cobertura']:checked");
+        if (seleccionado) {
+            btnAddPanMuerto.classList.remove("btn-disabled");
+            errorCoberturaPM.style.display = "none";
+        } else {
+            btnAddPanMuerto.classList.add("btn-disabled");
+        }
+    });
+    
+    // Añadir al carrito
+    btnAddPanMuerto.addEventListener("click", () => {
+      const coberturaSeleccionada = formCoberturaPM.querySelector("input[name='cobertura']:checked");
+      if (!coberturaSeleccionada) {
+        errorCoberturaPM.style.display = "block";
+        return;
+      }
+
+      const nombre = `Pan de Muerto Relleno: ${saborSeleccionadoPM} + Cobertura de ${coberturaSeleccionada.value}`;
+      // El precio es fijo ($35)
+      agregarAlCarrito(nombre, precioBasePM);
+
+      // cerrar y resetear
+      modalPanMuerto.style.display = "none";
+      saborSeleccionadoPM = null;
+    });
+
+    // === FIN PAN DE MUERTO RELLENO ===
 
     // añadir al carrito
     btnAddCharola.addEventListener("click", () => {
