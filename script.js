@@ -308,6 +308,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "Lagrimitas": { "Ch.": 10, "Gr.": 15 },
       "Coffe": { "Ch.": 12, "Gr.": 15 },
       "Arroz con Leche": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
+      "Chicharrón Preparado": { "Mitad": 15, "Completo": 30 }
     };
 
     const preciosVellana = {
@@ -337,8 +338,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "Pastel de Chocolate": 45,
       "Pastel de Beso de Angel": 50,
       "Maruchan": 25,
-      "Cigarros": 7,
-      "Chicharrón Preparado": 30
+      "Cigarros": 7
     };
 
     // --- Cerrar modal ---
