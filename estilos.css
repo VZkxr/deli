@@ -143,6 +143,69 @@ h2{
     padding: 16px;
 }
 
+/* --- ESTILOS BOTÓN INSTAGRAM CON ANIMACIÓN --- */
+
+/* Contenedor para centrar y separar */
+.instagram-callout-container {
+    margin: 25px 0; /* Espacio arriba y abajo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre "Síguenos" y el botón */
+}
+
+/* Texto "Síguenos👉" */
+.siguenos-texto {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--colorPrimario);
+}
+
+/* Botón de Instagram */
+.btn-instagram-animado {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    /* Gradiente característico de Instagram */
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    border-radius: 25px; /* Bordes redondeados */
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Aplicar la animación de balanceo (wobble) para llamar la atención */
+    /* Nombre | Duración | Función de tiempo | Retraso | Iteraciones */
+    animation: wobble-atencion 2s ease-in-out infinite;
+}
+
+/* Ícono dentro del botón */
+.btn-instagram-animado i {
+    margin-right: 8px;
+    font-size: 1.3rem;
+}
+
+/* Efecto al pasar el mouse: detiene la animación y lo agranda un poco */
+.btn-instagram-animado:hover {
+    animation-play-state: paused; /* Pausa la animación */
+    transform: scale(1.05); /* Crece ligeramente */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Definición de la animación de balanceo (Wobble) */
+@keyframes wobble-atencion {
+    0% { transform: translateX(0%); }
+    15% { transform: translateX(-5px) rotate(-2deg); } /* Izquierda leve y rotación */
+    30% { transform: translateX(4px) rotate(2deg); }   /* Derecha leve y rotación */
+    45% { transform: translateX(-3px) rotate(-1deg); }
+    60% { transform: translateX(2px) rotate(1deg); }
+    75% { transform: translateX(-1px); }
+    100% { transform: translateX(0%); }
+}
+
 /* PRODUCTOS */
 .productos {
     display: grid;
