@@ -319,6 +319,154 @@ document.addEventListener("DOMContentLoaded", function () {
     "Zarzamora": { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
   }
 
+  // --- Precios Fruta Loca ---
+  const preciosFrutaLoca = {
+    "Ch.": 30,
+    "Med.": 35,
+    "Gr.": 45,
+    "Tazón": 60
+  };
+
+  // --- Modal Fruta Loca ---
+  const modalFrutaLoca = document.getElementById("modal-fruta-loca");
+  const cerrarFrutaLoca = document.getElementById("cerrarFrutaLoca");
+  const tituloFL = document.getElementById("titulo-fl");
+
+  // Pasos
+  const pasoFLTamano = document.getElementById("paso-fl-tamano");
+  const pasoFLMiguelito = document.getElementById("paso-fl-miguelito");
+  const pasoFLGomitas = document.getElementById("paso-fl-gomitas");
+
+  // Formularios
+  const formFLTamano = document.getElementById("form-fl-tamano");
+  const formFLMiguelito = document.getElementById("form-fl-miguelito");
+  const formFLGomitas = document.getElementById("form-fl-gomitas");
+
+  // Botones
+  const btnNextFLTamano = document.getElementById("btn-next-fl-tamano");
+  const btnNextFLMiguelito = document.getElementById("btn-next-fl-miguelito");
+  const btnAddFL = document.getElementById("btn-add-fl");
+
+  // Errores
+  const errorFLTamano = document.getElementById("error-fl-tamano");
+  const errorFLMiguelito = document.getElementById("error-fl-miguelito");
+
+  let productoFLSeleccionado = null;
+  let precioFLBase = 0;
+  let tamanoFLSeleccionado = null;
+
+  // Abrir modal Fruta Loca (Varios tipos)
+  document.querySelectorAll(".btn-agregar[data-tipo='fruta-loca'], .btn-agregar[data-tipo='charola-loca']").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tipo = btn.dataset.tipo;
+      productoFLSeleccionado = btn.dataset.producto;
+      tituloFL.textContent = (tipo === 'charola-loca') ? "Charola Loca" : `Fruta Loca: ${productoFLSeleccionado}`;
+
+      // Reset UI
+      formFLTamano.innerHTML = "";
+      formFLMiguelito.reset();
+      formFLGomitas.reset();
+      btnNextFLTamano.classList.add("btn-disabled");
+      btnNextFLMiguelito.classList.add("btn-disabled");
+      btnAddFL.textContent = "Añadir";
+      errorFLTamano.style.display = "none";
+      errorFLMiguelito.style.display = "none";
+
+      modalFrutaLoca.style.display = "flex";
+
+      if (tipo === 'charola-loca') {
+        // Caso especial: Charola Loca (Salta paso 1)
+        tamanoFLSeleccionado = "Charola";
+        precioFLBase = 40;
+
+        pasoFLTamano.style.display = "none";
+        pasoFLMiguelito.style.display = "block"; // Inicia en paso 2
+        pasoFLGomitas.style.display = "none";
+      } else {
+        // Caso normal: Fruta Loca
+        pasoFLTamano.style.display = "block";
+        pasoFLMiguelito.style.display = "none";
+        pasoFLGomitas.style.display = "none";
+
+        // Llenar tamaños
+        Object.entries(preciosFrutaLoca).forEach(([tam, precio]) => {
+          const label = document.createElement("label");
+          label.innerHTML = `<input type="radio" name="tamano" value="${tam}" data-precio="${precio}"> ${tam} - $${precio}`;
+          formFLTamano.appendChild(label);
+        });
+      }
+    });
+  });
+
+  // Cerrar modal
+  cerrarFrutaLoca.addEventListener("click", () => modalFrutaLoca.style.display = "none");
+  window.addEventListener("click", (e) => {
+    if (e.target === modalFrutaLoca) modalFrutaLoca.style.display = "none";
+  });
+
+
+  // --- Paso 1: Tamaño ---
+  formFLTamano.addEventListener("change", () => {
+    if (formFLTamano.querySelector("input:checked")) {
+      btnNextFLTamano.classList.remove("btn-disabled");
+      errorFLTamano.style.display = "none";
+    }
+  });
+
+  btnNextFLTamano.addEventListener("click", () => {
+    const seleccionado = formFLTamano.querySelector("input:checked");
+    if (!seleccionado) {
+      errorFLTamano.style.display = "block";
+      return;
+    }
+    tamanoFLSeleccionado = seleccionado.value;
+    precioFLBase = parseInt(seleccionado.dataset.precio);
+
+    pasoFLTamano.style.display = "none";
+    pasoFLMiguelito.style.display = "block";
+  });
+
+  // --- Paso 2: Miguelito ---
+  formFLMiguelito.addEventListener("change", () => {
+    if (formFLMiguelito.querySelector("input:checked")) {
+      btnNextFLMiguelito.classList.remove("btn-disabled");
+      errorFLMiguelito.style.display = "none";
+    }
+  });
+
+  btnNextFLMiguelito.addEventListener("click", () => {
+    const seleccionado = formFLMiguelito.querySelector("input:checked");
+    if (!seleccionado) {
+      errorFLMiguelito.style.display = "block";
+      return;
+    }
+    pasoFLMiguelito.style.display = "none";
+    pasoFLGomitas.style.display = "block";
+
+    btnAddFL.textContent = `Añadir - $${precioFLBase}`;
+  });
+
+  // --- Paso 3: Gomitas + Añadir ---
+  btnAddFL.addEventListener("click", () => {
+    const errorFLGomitas = document.getElementById("error-fl-gomitas");
+    const gomitasCheck = formFLGomitas.querySelector("input:checked");
+
+    if (!gomitasCheck) {
+      errorFLGomitas.style.display = "block";
+      return;
+    }
+    errorFLGomitas.style.display = "none";
+
+    const miguelito = formFLMiguelito.querySelector("input:checked").value;
+    const gomitas = gomitasCheck.value;
+
+    const nombre = `Fruta Loca (${productoFLSeleccionado}) ${tamanoFLSeleccionado} | Miguelito: ${miguelito} | Gomitas: ${gomitas}`;
+
+    agregarAlCarrito(nombre, precioFLBase);
+
+    modalFrutaLoca.style.display = "none";
+  });
+
   // --- Producto con sabores (De Agua) ---
   const saboresAgua = {
     "Uva": 10,
