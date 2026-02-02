@@ -284,6 +284,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const pasoVasoTopping = document.getElementById("paso-topping-vaso");
     const pasoVasoJarabe = document.getElementById("paso-jarabe");
 
+    const descripciones = {
+        "Vaso Oreo": "Fresas con crema y capas de galleta oreo molida, un topping a elegir y un jarabe.",
+        "Vaso Brownie": "Fresas con crema y trocitos de galleta brownie más chocolate hershey's de topping.",
+        "Vaso Cheescake": "Fresas con crema, cubitos de nuestro d'elicioso cheescake casero y lechera.",
+        "Deli Fresa": "Vaso recubierto de avellana, fresas con crema, cubitos o galleta y jarabe de tu preferencia"
+    };
+
     document.querySelectorAll(".btn-agregar-modal[data-tipo='vaso'], .btn-agregar-modal[data-tipo='vellana'], .btn-agregar-modal[data-tipo='oreo'], .btn-agregar-modal[data-tipo='brownie'], .btn-agregar-modal[data-tipo='cheescake'], .btn-agregar-modal[data-tipo='deli-fresa']").forEach(btn => {
         btn.addEventListener("click", () => {
             pSeleccionado = btn.dataset.producto;
@@ -293,6 +300,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (tipoSeleccionado === 'vaso') titulo += " (Crema)";
             else if (tipoSeleccionado === 'vellana') titulo += " (Vellana)";
             document.getElementById("titulo-vaso").textContent = titulo;
+
+            // Set description
+            const descEl = document.getElementById("desc-vaso");
+            descEl.textContent = descripciones[pSeleccionado] || "";
+            descEl.style.display = descripciones[pSeleccionado] ? "block" : "none";
 
             // Generar opciones de tamaño
             const formulario = document.getElementById("form-vaso-tamano");
@@ -577,6 +589,8 @@ document.addEventListener("DOMContentLoaded", function () {
             let precio = 45; // default
             if (prod.includes("Flan Napolitano")) precio = 30;
             if (prod.includes("Beso")) precio = 50;
+            if (prod === "Pastel de Oreo de 3 leches") precio = 50;
+            if (prod === "Pastel de 3 leches") precio = 40;
 
             pRebanada = { nombre: prod, precio: precio };
             document.getElementById("titulo-rebanadas").textContent = prod;
