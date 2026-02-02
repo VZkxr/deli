@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Admin Panel Loaded");
 
-    // --- Variables de Estado ---
+    // --- Variables de Estado ---///
     let carrito = [];
 
     // Configuración de Precios (Copiados y adaptados de script.js)
