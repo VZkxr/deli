@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     formTopping.reset();
     btnSiguienteFrutas.classList.add("btn-disabled");
     errorFrutas.style.display = "none";
-    btnAddCharola.textContent = "Añadir - $40"; // reset precio base
+    btnAddCharola.textContent = "Añadir - $45"; // reset precio base
   });
 
   // cerrar modal
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
       formTopping.querySelectorAll("input[name='topping']:checked")
     ).filter(input => input.value !== "Ninguno").length;
 
-    let precio = 40;
+    let precio = 45;
     if (seleccionados > 1) {
       precio += (seleccionados - 1) * 2; // cobra a partir del 2do
     }
@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // excluir "Ninguno" del cálculo
     const toppingsValidos = toppingsSeleccionados.filter(t => t !== "Ninguno");
 
-    let precio = 40;
+    let precio = 45;
     if (toppingsValidos.length > 1) {
       precio += (toppingsValidos.length - 1) * 2;
     }
@@ -299,16 +299,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- Productos con tamaños ---
   const preciosConCrema = {
-    "Fresas": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-    "Uvas": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-    "Durazno": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-    "Manzana": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-    "Zarzamora": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-    "Con Yogurth": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
+    "Fresas": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
+    "Uvas": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
+    "Durazno": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
+    "Manzana": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
+    "Zarzamora": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
+    "Con Yogurth": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
     "Lagrimitas": { "Ch.": 10, "Gr.": 15 },
     "Coffe": { "Ch.": 12, "Gr.": 15 },
     "Arroz con Leche": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-    "Chicharrón Preparado": { "Mitad": 18, "Completo": 35 }
   };
 
   const preciosVellana = {
