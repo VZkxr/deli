@@ -61,75 +61,11 @@
                 </a>
             </p>
 
+            <h1 id="salados" class="title">SALADOS</h1>
             <h2>Fruta loca</h2>
-            <div class="precios-multiples">
-                <div class="precio-item">
-                    <span class="etiqueta">Ch.</span>
-                    <span class="precio">$30</span>
-                </div>
-                <div class="precio-item">
-                    <span class="etiqueta">Med.</span>
-                    <span class="precio">$35</span>
-                </div>
+            <div id="render-precios-fruta-loca" class="precios-multiples"></div>
 
-                <div class="precio-item">
-                    <span class="etiqueta">Gr.</span>
-                    <span class="precio">$45</span>
-                </div>
-                <div class="precio-item">
-                    <span class="etiqueta">Tazón</span>
-                    <span class="precio">$60</span>
-                </div>
-            </div>
-
-            <div class="productos">
-                <div class="producto-item">
-                    <img src="img/f_loca/fresas.jpg" alt="Fresas">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Fresas</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-tipo="fruta-loca" data-producto="Fresas">Agregar</button>
-                        </div>
-                        <p>Las clásicas fresas de D'eli postres, bañadas en Chamoy y Tajín.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/f_loca/manzana.jpg" alt="Manzana">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Manzana</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-tipo="fruta-loca" data-producto="Manzana">Agregar</button>
-                        </div>
-                        <p>Finos cortes de manzana, acompañados con la base de Chamoy y Tajín.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/f_loca/uvas.jpg" alt="Uvas">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Uvas</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-tipo="fruta-loca" data-producto="Uvas">Agregar</button>
-                        </div>
-                        <p>Uvas tan dulces que se integran de forma intensa al Chamoy y al Tajín.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/con_crema/char.png" alt="Charola loca">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Charola loca</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$40</span>
-                        </div>
-                        <p>Arma tu trinidad de 3 productos a elegir entre fresas, manzana y uvas, con una cobertura de
-                            Chamoy y Tajín.</p>
-                        <button class="btn-agregar" data-tipo="charola-loca" data-producto="Charola loca">Armar
-                            charola</button>
-                    </div>
-                </div>
+            <div id="render-fruta-loca" class="productos">
             </div>
             <!-- <h2>Ups! Hoy no contamos con especiales</h2> -->
 
@@ -271,339 +207,64 @@
                         <h2>Elige toppings (opcional)</h2>
                         <div class="scroll-toppings">
                             <form id="form-vaso-topping" class="form-opciones">
-                                <label>
-                                    <input type="checkbox" name="topping" value="Kranky">
-                                    <span>Kranky</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chispas de colores">
-                                    <span>Chispas de colores</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chispas de chocolate">
-                                    <span>Chispas de chocolate</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Nuez">
-                                    <span>Nuez</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Pasas">
-                                    <span>Pasas</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Granola">
-                                    <span>Granola</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Canela">
-                                    <span>Canela</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Lechera">
-                                    <span>Lechera</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chantilli">
-                                    <span>Chantilli</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Ninguno">
-                                    <span>Ninguno</span>
-                                </label>
                             </form>
                         </div>
+                        <button id="btn-paso2-vaso" class="btn-agregar">Siguiente</button>
+                    </div>
+
+                    <!-- Paso 3: Jarabes -->
+                    <div id="paso-jarabe" class="paso-vaso" style="display:none;">
+                        <h2>Elige un jarabe</h2>
+                        <form id="form-vaso-jarabe" class="form-opciones">
+                        </form>
                         <button id="btn-add-vaso" class="btn-agregar">Añadir</button>
                     </div>
                 </div>
             </div>
 
             <!-- Bloque de precios múltiples -->
-            <div class="precios-multiples">
-                <div class="precio-item">
-                    <span class="etiqueta">Ch.</span>
-                    <span class="precio">$35</span>
-                </div>
-                <div class="precio-item">
-                    <span class="etiqueta">Med.</span>
-                    <span class="precio">$40</span>
-                </div>
-                <div class="precio-item">
-                    <span class="etiqueta">Gr.</span>
-                    <span class="precio">$50</span>
-                </div>
-                <div class="precio-item">
-                    <span class="etiqueta">1/2</span>
-                    <span class="precio">$85</span>
-                </div>
-            </div>
+            <div id="render-precios-con-crema" class="precios-multiples"></div>
 
-            <div class="productos">
-                <div class="producto-item">
-                    <img src="img/con_crema/fresas.png" alt="Fresas">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Fresas</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Fresas" data-tipo="vaso">Agregar</button>
-                        </div>
-                        <p>Deliciosas fresas cubiertas de receta secreta.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/con_crema/uvas.png" alt="Uvas">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Uvas</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Uvas" data-tipo="vaso">Agregar</button>
-                        </div>
-                        <p>Uvas de calidad, escogidas con amor por D'eli.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/con_crema/duraznos.png" alt="Durazno">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Durazno</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Durazno" data-tipo="vaso">Agregar</button>
-                        </div>
-                        <p>Corte de duraznos finos, entregados para alguien con el mismo adjetivo.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/con_crema/manzanas.png" alt="Manzana">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Manzana</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Manzana" data-tipo="vaso">Agregar</button>
-                        </div>
-                        <p>Por qué esperar fiestas de diciembre, los placeres de la ensalada de manzana comienzan
-                            hoy.
-                        </p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/con_crema/zarzamora.png" alt="Zarzamora">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Zarzamora</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-producto="Zarzamora" data-tipo="vaso">Agregar</button>
-                        </div>
-                        <p>Un postre peculiar con un sabor inigualable gracias a la calidad de la zarzamora.</p>
-                    </div>
-                </div>
+            <div id="render-con-crema" class="productos">
             </div>
 
             <!-- ================ SUB-SECCIÓN CREMA-VELLANA ================ -->
             <h2>En Vaso (Recubierto de Crema-Vellana)</h2>
-            <!-- Modal Con Crema (En vaso) -->
-            <div id="modal-vaso" class="modal">
-                <div class="modal-contenido">
-                    <span id="cerrarVaso" class="cerrar">&times;</span>
+            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Fruta con crema en vaso recubierto de
+                crema de avellanas y un topping a elegir</p>
+            <div id="render-precios-vellana" class="precios-multiples"></div>
+            <div id="render-vellana" class="productos"></div>
 
-                    <!-- Paso 1: Tamaño -->
-                    <div id="paso-tamano" class="paso-vaso">
-                        <h2 id="titulo-vaso"></h2>
-                        <p>Selecciona un tamaño:</p>
-                        <form id="form-vaso-tamano" class="form-opciones">
-                            <!-- Botones generados dinámicamente según preciosConCrema -->
-                        </form>
-                        <button id="btn-siguiente-tamano" class="btn-agregar btn-disabled">Siguiente</button>
-                        <p id="error-vaso-tamano" class="error-inline" style="display:none; margin-top:8px;">
-                            Debes escoger un tamaño
-                        </p>
-                    </div>
+            <h2>En Vaso (Oreo)</h2>
+            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Fruta con crema y capas de galleta
+                oreo molida, un topping a elegir y un jarabe</p>
+            <div id="render-precios-oreo" class="precios-multiples"></div>
+            <div id="render-oreo" class="productos"></div>
 
-                    <!-- Paso 2: Toppings -->
-                    <div id="paso-topping-vaso" class="paso-vaso" style="display:none;">
-                        <h2>Elige toppings (opcional)</h2>
-                        <div class="scroll-toppings">
-                            <form id="form-vaso-topping" class="form-opciones">
-                                <label>
-                                    <input type="checkbox" name="topping" value="Kranky">
-                                    <span>Kranky</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chispas de colores">
-                                    <span>Chispas de colores</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chispas de chocolate">
-                                    <span>Chispas de chocolate</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Nuez">
-                                    <span>Nuez</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Pasas">
-                                    <span>Pasas</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Granola">
-                                    <span>Granola</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Canela">
-                                    <span>Canela</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Lechera">
-                                    <span>Lechera</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chantilli">
-                                    <span>Chantilli</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Ninguno">
-                                    <span>Ninguno</span>
-                                </label>
-                            </form>
-                        </div>
-                        <button id="btn-add-vaso" class="btn-agregar">Añadir</button>
-                    </div>
-                </div>
-            </div>
+            <h2>En Vaso (Brownie)</h2>
+            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Fruta con crema y trocitos de galleta
+                brownie más chocolate hershey's de topping</p>
+            <div id="render-precios-brownie" class="precios-multiples"></div>
+            <div id="render-brownie" class="productos"></div>
 
-            <!-- Bloque de precios múltiples -->
-            <div class="precios-multiples">
-                <div class="precio-item">
-                    <span class="etiqueta">Ch.</span>
-                    <span class="precio">$45</span>
-                </div>
-                <div class="precio-item">
-                    <span class="etiqueta">Med.</span>
-                    <span class="precio">$55</span>
-                </div>
-                <div class="precio-item">
-                    <span class="etiqueta">Tazón</span>
-                    <span class="precio">$70</span>
-                </div>
-                <div class="precio-item">
-                    <span class="etiqueta">Gr.</span>
-                    <span class="precio">$90</span>
-                </div>
-            </div>
+            <h2>En Vaso (Cheesecake)</h2>
+            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Fruta con crema, cubitos de nuestro
+                D'elicioso cheesecake casero y lechera</p>
+            <div id="render-precios-cheesecake" class="precios-multiples"></div>
+            <div id="render-cheesecake" class="productos"></div>
 
-            <div class="productos">
-                <div class="producto-item">
-                    <img src="img/vellana/fresas.png" alt="Fresas">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Fresas</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-tipo="vellana" data-producto="Fresas">Agregar</button>
-                        </div>
-                        <p>Deliciosas fresas cubiertas de receta secreta.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/vellana/uvas.png" alt="Uvas">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Uvas</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-tipo="vellana" data-producto="Uvas">Agregar</button>
-                        </div>
-                        <p>Uvas de calidad, escogidas con amor por D'eli.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/vellana/duraznos.png" alt="Durazno">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Durazno</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-tipo="vellana" data-producto="Durazno">Agregar</button>
-                        </div>
-                        <p>Corte de duraznos finos, entregados para alguien con el mismo adjetivo.</p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/vellana/manzana.png" alt="Manzana">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Manzana</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-tipo="vellana" data-producto="Manzana">Agregar</button>
-                        </div>
-                        <p>Por qué esperar fiestas de diciembre, los placeres de la ensalada de manzana comienzan
-                            hoy.
-                        </p>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/vellana/zarzamoras.png" alt="Zarzamora">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Zarzamora</h2>
-                            <span class="linea"></span>
-                            <button class="btn-agregar" data-tipo="vellana" data-producto="Zarzamora">Agregar</button>
-                        </div>
-                        <p>Un postre peculiar con un sabor inigualable gracias a la calidad de la zarzamora.</p>
-                    </div>
-                </div>
-            </div>
+            <h2>En Vaso (D'eli fresa)</h2>
+            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Vaso recubierto de avellana, fruta
+                con crema, cubitos o galleta y jarabe de tu preferencia</p>
+            <div id="render-precios-delifresa" class="precios-multiples"></div>
+            <div id="render-delifresa" class="productos"></div>
 
             <!-- =================================================== -->
             <!-- ================ SECCIÓN GELATINAS ================ -->
             <!-- =================================================== -->
             <h1 id="gelatinas" class="title">GELATINAS</h1>
 
-            <div class="productos">
-                <div class="producto-item">
-                    <img src="img/gelatinas/yogurth.png" alt="Con Yogurth">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Con Yogurth</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$30< </span>
-                        </div>
-                        <p>Gelatina con yogurth cremosa y fresca en sus distintas presentaciones.</p>
-                        <button class="btn-agregar" data-producto="Con Yogurth">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/gelatinas/agua.jpg" alt="De Agua">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>De Agua</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$10</span>
-                        </div>
-                        <p>Gelatina de agua preparada con la delicadeza del buen equilibrio.</p>
-                        <button class="btn-agregar" data-producto="Agua">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/gelatinas/durazno.jpg" alt="Tres Leches de Durazno">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Tres Leches de Durazno</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$28</span>
-                        </div>
-                        <p>La mejor gelatina la tenemos en D'eli.</p>
-                        <button class="btn-agregar" data-producto="Tres Leches de Durazno">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/gelatinas/vainilla.jpg" alt="Flan Casero de Vainilla">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Flan Casero de Vainilla</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$15</span>
-                        </div>
-                        <p>Explora los sabores de la gloria con este delicioso flan casero de vainilla.</p>
-                        <button class="btn-agregar" data-producto="Flan Casero de Vainilla">Agregar</button>
-                    </div>
-                </div>
+            <div id="render-gelatinas" class="productos">
             </div>
             <h1 id="rebanadas" class="title">REBANADAS</h1>
             <!-- Modal para Rebanadas -->
@@ -619,150 +280,11 @@
                 </div>
             </div>
 
-            <div class="productos">
-                <div class="producto-item">
-                    <img src="img/rebanadas/flan.jpg" alt="Flan Napolitano">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Flan Napolitano</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$30</span>
-                        </div>
-                        <p>Delicioso flan casero con caramelo suave.</p>
-                        <button class="btn-agregar" data-producto="Flan Napolitano">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/rebanadas/pay.jpg" alt="Pay de Limón">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Pay de Limón</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$45</span>
-                        </div>
-                        <p>Pay de Limón hecho con los mejores ingredientes.</p>
-                        <button class="btn-agregar" data-producto="Pay de Limón">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/rebanadas/imposible.jpg" alt="Pastel Imposible">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Pastel Imposible</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$45</span>
-                        </div>
-                        <p>Pastel posible hecho por D'eli.</p>
-                        <button class="btn-agregar" data-producto="Pastel Imposible">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/rebanadas/choco.jpg" alt="Pastel de Chocolate">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Pastel de Chocolate</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$45</span>
-                        </div>
-                        <p>Pastel de chocolate real, hecho solo para la realeza.</p>
-                        <button class="btn-agregar" data-producto="Pastel de Chocolate">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/rebanadas/beso.jpg" alt="Pastel Beso de Angel">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Pastel Beso de Angel</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$50</span>
-                        </div>
-                        <p>Esta deliciosa rebanada de tres leches relleno de flan es una nueva experiencia.</p>
-                        <button class="btn-agregar" data-producto="Pastel de Beso de Angel">Agregar</button>
-                    </div>
-                </div>
+            <div id="render-rebanadas" class="productos">
             </div>
             <h1 id="extras" class="title">EXTRAS</h1>
 
-            <div class="productos">
-                <div class="producto-item">
-                    <img src="img/extras/arroz.jpg" alt="Arroz con Leche">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Arroz con Leche</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$30<</span>
-                        </div>
-                        <p>El clásico postre casero con el toque especial de D'eli.</p>
-                        <button class="btn-agregar" data-producto="Arroz con Leche" data-tipo="vaso">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/extras/lagr.jpg" alt="Lagrimitas">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Lagrimitas</h2>
-                            <span class="linea"></span>
-                            <div class="precios-multiples">
-                                <div>
-                                    <span class="etiqueta">Ch.</span>
-                                    <span class="precio">$10</span>
-                                </div>
-                                <div>
-                                    <span class="etiqueta">Gr.</span>
-                                    <span class="precio">$15</span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Vuelve a lo clásico con esta deliciosa botana tradicional acompañada de crema y salsa.
-                        </p>
-                        <button class="btn-agregar" data-producto="Lagrimitas">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/extras/maruchan.jpg" alt="Maruchan">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Maruchan</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$25</span>
-                        </div>
-                        <p>La comida preferida por los estudiantes, averigua el porqué.</p>
-                        <button class="btn-agregar" data-producto="Maruchan">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/extras/cafe.jpg" alt="Café">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Café</h2>
-                            <span class="linea"></span>
-                            <div class="precios-multiples">
-                                <div>
-                                    <span class="etiqueta">Ch.</span>
-                                    <span class="precio">$12</span>
-                                </div>
-                                <div>
-                                    <span class="etiqueta">Gr.</span>
-                                    <span class="precio">$15</span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Despierta tu día y noche con un buen sorbo de la bebida de los dioses modernos.</p>
-                        <button class="btn-agregar" data-producto="Coffe">Agregar</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <img src="img/extras/cigar.jpg" alt="Cigarros">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Cigarros</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$7</span>
-                        </div>
-                        <p>Producto aún no clasificado.</p>
-                        <button class="btn-agregar" data-producto="Cigarros">Agregar</button>
-                    </div>
-                </div>
+            <div id="render-extras" class="productos">
             </div>
         </div>
         <!-- //CONTENT-->
@@ -771,6 +293,7 @@
         </footer>
     </div>
 
+    <script src="data.js"></script>
     <script src="script.js"></script>
 
     <!-- Modal Fruta Loca -->

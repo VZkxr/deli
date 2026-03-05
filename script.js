@@ -1,6 +1,87 @@
 document.addEventListener("DOMContentLoaded", function () {
   const nav = document.querySelector("nav");
 
+  // --- Renderizado Dinámico ---
+  function renderProductos(contenedorId, lista, tipoBase) {
+    const contenedor = document.getElementById(contenedorId);
+    if (!contenedor) return;
+
+    let html = "";
+    lista.forEach(item => {
+      let extraDivInfo = "";
+      let dataAtributos = "";
+
+      if (item.precioHTML) {
+        extraDivInfo = item.precioHTML;
+      } else if (item.objPrecios) {
+        let divs = "";
+        Object.entries(item.objPrecios).forEach(([etiqueta, valor]) => {
+          divs += `<div><span class="etiqueta">${etiqueta}</span><span class="precio">$${valor}</span></div>`;
+        });
+        extraDivInfo = `<div class="precios-multiples">${divs}</div>`;
+      }
+
+      let elTitulo = item.titulo || item.nombre;
+      let botonTipo = item.tipo || tipoBase;
+      let btnAttr = botonTipo ? `data-tipo="${botonTipo}"` : "";
+
+      let btnText = "Agregar";
+      if (item.nombre === "Charola loca") btnText = "Armar charola";
+
+      html += `
+            <div class="producto-item">
+                <img src="${item.img}" alt="${item.nombre}">
+                <div class="detalle">
+                    <div class="titulo-precio">
+                        <h2>${elTitulo}</h2>
+                        <span class="linea"></span>
+                        ${extraDivInfo}
+                        <button class="btn-agregar" data-producto="${item.nombre}" ${btnAttr}>${btnText}</button>
+                    </div>
+                    <p>${item.desc}</p>
+                </div>
+            </div>
+          `;
+    });
+    contenedor.innerHTML = html;
+  }
+
+  function renderPreciosMultiples(contenedorId, objPrecios) {
+    const contenedor = document.getElementById(contenedorId);
+    if (!contenedor) return;
+    let html = "";
+    Object.entries(objPrecios).forEach(([etiqueta, valor]) => {
+      html += `
+            <div class="precio-item">
+                <span class="etiqueta">${etiqueta}</span>
+                <span class="precio">$${valor}</span>
+            </div>
+          `;
+    });
+    contenedor.innerHTML = html;
+  }
+
+  // Render Prices
+  renderPreciosMultiples("render-precios-fruta-loca", configPrecios.frutaLoca);
+  renderPreciosMultiples("render-precios-con-crema", configPrecios.conCrema["Fresas"]);
+  renderPreciosMultiples("render-precios-vellana", configPrecios.vellana["Fresas"]);
+  renderPreciosMultiples("render-precios-oreo", configPrecios.oreo);
+  renderPreciosMultiples("render-precios-brownie", configPrecios.brownie);
+  renderPreciosMultiples("render-precios-cheesecake", configPrecios.cheescake);
+  renderPreciosMultiples("render-precios-delifresa", configPrecios.deliFresa);
+
+  // Render Products
+  renderProductos("render-fruta-loca", menuRenderData.frutaLoca);
+  renderProductos("render-con-crema", menuRenderData.conCremaVaso, "vaso");
+  renderProductos("render-vellana", menuRenderData.conCremaVellana, "vellana");
+  renderProductos("render-oreo", menuRenderData.conCremaOreo, "oreo");
+  renderProductos("render-brownie", menuRenderData.conCremaBrownie, "brownie");
+  renderProductos("render-cheesecake", menuRenderData.conCremaCheesecake, "cheescake");
+  renderProductos("render-delifresa", menuRenderData.conCremaDeliFresa, "deli-fresa");
+  renderProductos("render-gelatinas", menuRenderData.gelatinas);
+  renderProductos("render-rebanadas", menuRenderData.rebanadas);
+  renderProductos("render-extras", menuRenderData.extras);
+
   // --- scroll nav ---
   window.addEventListener("scroll", function () {
     if (window.scrollY > 130) {
@@ -129,20 +210,23 @@ document.addEventListener("DOMContentLoaded", function () {
   let productoRebanada = null;
   let precioRebanada = 0;
 
-  // --- Modal Con Crema (En vaso) ---
+  // --- Modal Con Crema (En vaso y variantes) ---
   const modalVaso = document.getElementById("modal-vaso");
   const cerrarVaso = document.getElementById("cerrarVaso");
 
   // pasos
   const pasoTamano = document.getElementById("paso-tamano");
   const pasoToppingVaso = document.getElementById("paso-topping-vaso");
+  const pasoJarabeVaso = document.getElementById("paso-jarabe");
 
   // formularios
   const formTamano = document.getElementById("form-vaso-tamano");
   const formToppingVaso = document.getElementById("form-vaso-topping");
+  const formJarabeVaso = document.getElementById("form-vaso-jarabe");
 
   // botones
   const btnSiguienteTamano = document.getElementById("btn-siguiente-tamano");
+  const btnPaso2Vaso = document.getElementById("btn-paso2-vaso");
   const btnAddVaso = document.getElementById("btn-add-vaso");
 
   // textos dinámicos
@@ -150,41 +234,76 @@ document.addEventListener("DOMContentLoaded", function () {
   const errorTamano = document.getElementById("error-vaso-tamano");
 
   let productoSeleccionado = null;
-  let precioBase = 0;
   let tipoVasoSeleccionado = null;
 
-  // Abrir modal de vaso (con crema o vellana)
-  document.querySelectorAll(".btn-agregar[data-tipo='vaso'], .btn-agregar[data-tipo='vellana']")
-    .forEach(btn => {
-      btn.addEventListener("click", () => {
+  // Abrir modal de vaso (delegación de eventos para botones dinámicos)
+  document.body.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn-agregar")) {
+      const btn = e.target;
+      const tipo = btn.dataset.tipo;
+
+      if (['vaso', 'vellana', 'oreo', 'brownie', 'cheescake', 'deli-fresa'].includes(tipo)) {
         productoSeleccionado = btn.dataset.producto;
-        const tipo = btn.dataset.tipo || 'vaso';
-        tipoVasoSeleccionado = tipo; // <-- guardamos el origen (vaso o vellana)
-        tituloVaso.textContent = productoSeleccionado;
+        tipoVasoSeleccionado = tipo;
+
+        let titulo = productoSeleccionado;
+        if (tipo === 'vaso') titulo += " (Crema)";
+        else if (tipo === 'vellana') titulo += " (Vellana)";
+        tituloVaso.textContent = titulo;
 
         // Reset
         pasoTamano.style.display = "block";
         pasoToppingVaso.style.display = "none";
+        pasoJarabeVaso.style.display = "none";
         formTamano.innerHTML = "";
-        formToppingVaso.reset();
+        formToppingVaso.innerHTML = "";
+        formJarabeVaso.innerHTML = "";
         btnSiguienteTamano.classList.add("btn-disabled");
-        btnAddVaso.textContent = "Añadir";
 
-        // Cargar precios según tipo
-        const listaPrecios = (tipo === "vellana") ? preciosVellana : preciosConCrema;
+        // Cargar precios
+        let precios = configPrecios.conCrema[productoSeleccionado];
+        if (tipo === 'vellana') precios = configPrecios.vellana[productoSeleccionado];
+        else if (tipo === 'oreo') precios = configPrecios.oreo;
+        else if (tipo === 'brownie') precios = configPrecios.brownie;
+        else if (tipo === 'cheescake') precios = configPrecios.cheescake;
+        else if (tipo === 'deli-fresa') precios = configPrecios.deliFresa;
 
-        if (listaPrecios[productoSeleccionado]) {
-          Object.entries(listaPrecios[productoSeleccionado]).forEach(([tam, precio]) => {
+        if (precios) {
+          for (const [tam, precio] of Object.entries(precios)) {
             const label = document.createElement("label");
             label.innerHTML = `<input type="radio" name="tamano" value="${tam}" data-precio="${precio}"> ${tam} - $${precio}`;
             formTamano.appendChild(label);
+          }
+        }
+
+        // Cargar Toppings
+        if (tipo === 'deli-fresa') {
+          listasToppings.deliFresa.forEach(top => {
+            formToppingVaso.innerHTML += `<label><input type="radio" name="topping" value="${top}"> ${top}</label>`;
+          });
+        } else {
+          listasToppings.general.forEach(top => {
+            let labelText = top;
+            if (configPrecios.extras[top]) labelText += ` (+$${configPrecios.extras[top]})`;
+            formToppingVaso.innerHTML += `<label><input type="checkbox" name="topping" value="${top}"> ${labelText}</label>`;
           });
         }
 
-        modalVaso.style.display = "flex";
-      });
-    });
+        // Cargar Jarabes
+        listasToppings.jarabes.forEach(jar => {
+          formJarabeVaso.innerHTML += `<label><input type="radio" name="jarabe" value="${jar}"> ${jar}</label>`;
+        });
 
+        if (tipo === 'oreo' || tipo === 'deli-fresa') {
+          btnPaso2Vaso.textContent = "Siguiente";
+        } else {
+          btnPaso2Vaso.textContent = "Añadir";
+        }
+
+        modalVaso.style.display = "flex";
+      }
+    }
+  });
 
   // cerrar modal
   cerrarVaso.addEventListener("click", () => {
@@ -199,8 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   formTamano.addEventListener("change", () => {
-    const seleccionado = formTamano.querySelector("input[name='tamano']:checked");
-    if (seleccionado) {
+    if (formTamano.querySelector("input[name='tamano']:checked")) {
       btnSiguienteTamano.classList.remove("btn-disabled");
       errorTamano.style.display = "none";
     }
@@ -213,67 +331,126 @@ document.addEventListener("DOMContentLoaded", function () {
       errorTamano.style.display = "block";
       return;
     }
-    precioBase = parseInt(seleccionado.dataset.precio);
+
+    // Si es brownie o cheescake van directo al carrito
+    if (tipoVasoSeleccionado === 'brownie' || tipoVasoSeleccionado === 'cheescake') {
+      finalizarVaso();
+      return;
+    }
 
     pasoTamano.style.display = "none";
     pasoToppingVaso.style.display = "block";
 
-    btnAddVaso.textContent = `Añadir - $${precioBase}`;
+    // resetear precio si es normal o vellana
+    if (tipoVasoSeleccionado !== 'oreo' && tipoVasoSeleccionado !== 'deli-fresa') {
+      const precioBase = parseInt(seleccionado.dataset.precio);
+      btnPaso2Vaso.textContent = `Añadir - $${precioBase}`;
+    }
   });
 
-  // lógica de "Ninguno" + precio dinámico
+  // lógica de "Ninguno" dinámico
   formToppingVaso.addEventListener("change", (e) => {
-    const checkNinguno = formToppingVaso.querySelector("input[value='Ninguno']");
+    if (tipoVasoSeleccionado === 'deli-fresa') return; // radio buttons, no logic needed
 
+    const checkNinguno = formToppingVaso.querySelector("input[value='Ninguno']");
     if (e.target.value === "Ninguno" && e.target.checked) {
       formToppingVaso.querySelectorAll("input[name='topping']").forEach(input => {
         if (input.value !== "Ninguno") input.checked = false;
       });
-    } else if (e.target.value !== "Ninguno" && e.target.checked) {
+    } else if (e.target.value !== "Ninguno" && e.target.checked && checkNinguno) {
       checkNinguno.checked = false;
     }
 
-    const seleccionados = Array.from(
-      formToppingVaso.querySelectorAll("input[name='topping']:checked")
-    ).filter(input => input.value !== "Ninguno").length;
+    // Actualizar texto del botón con el precio dinámico
+    const tamInput = formTamano.querySelector("input[name='tamano']:checked");
+    if (!tamInput) return;
+    let precio = parseInt(tamInput.dataset.precio);
 
-    let precio = precioBase;
-    if (seleccionados > 1) {
-      precio += (seleccionados - 1) * 2;
+    const toppingsSeleccionados = Array.from(formToppingVaso.querySelectorAll("input:checked")).map(i => i.value);
+    let normales = 0;
+    toppingsSeleccionados.forEach(top => {
+      if (configPrecios.extras[top]) precio += configPrecios.extras[top];
+      else if (top !== "Ninguno") normales++;
+    });
+    if (normales > 1) {
+      precio += (normales - 1) * 2;
     }
-    btnAddVaso.textContent = `Añadir - $${precio}`;
+
+    if (tipoVasoSeleccionado !== 'oreo' && tipoVasoSeleccionado !== 'deli-fresa') {
+      btnPaso2Vaso.textContent = `Añadir - $${precio}`;
+    }
   });
 
-  // añadir al carrito
-  btnAddVaso.addEventListener("click", () => {
-    const tamSeleccionado = formTamano.querySelector("input[name='tamano']:checked");
-    if (!tamSeleccionado) {
-      errorTamano.style.display = "block";
-      return;
+  // paso 2 -> 3 (o final)
+  btnPaso2Vaso.addEventListener("click", () => {
+    if (tipoVasoSeleccionado === 'oreo' || tipoVasoSeleccionado === 'deli-fresa') {
+      pasoToppingVaso.style.display = "none";
+      pasoJarabeVaso.style.display = "block";
+    } else {
+      finalizarVaso();
+    }
+  });
+
+  // jarabe -> final
+  btnAddVaso.addEventListener("click", finalizarVaso);
+
+  function finalizarVaso() {
+    const tamInput = formTamano.querySelector("input[name='tamano']:checked");
+    if (!tamInput) return;
+    const tamNombre = tamInput.value;
+    const tamPrecio = parseInt(tamInput.dataset.precio);
+
+    let toppings = [];
+    if (tipoVasoSeleccionado === 'deli-fresa') {
+      const t = formToppingVaso.querySelector("input:checked");
+      if (t) toppings.push(t.value);
+    } else if (tipoVasoSeleccionado !== 'brownie' && tipoVasoSeleccionado !== 'cheescake') {
+      toppings = Array.from(formToppingVaso.querySelectorAll("input:checked")).map(i => i.value);
     }
 
-    const toppingsSeleccionados = Array.from(
-      formToppingVaso.querySelectorAll("input[name='topping']:checked")
-    ).map(input => input.value);
-
-    const toppingsFinal = toppingsSeleccionados.length > 0 ? toppingsSeleccionados : ["Ninguno"];
-    const toppingsValidos = toppingsSeleccionados.filter(t => t !== "Ninguno");
-
-    let precio = precioBase;
-    if (toppingsValidos.length > 1) {
-      precio += (toppingsValidos.length - 1) * 2;
+    let jarabe = null;
+    if (tipoVasoSeleccionado === 'oreo' || tipoVasoSeleccionado === 'deli-fresa') {
+      const j = formJarabeVaso.querySelector("input:checked");
+      if (j) jarabe = j.value;
     }
 
-    // detectar si el modal actual fue abierto desde la sección "vellana"
+    let precioFinal = tamPrecio;
+
+    if (tipoVasoSeleccionado !== 'deli-fresa' && tipoVasoSeleccionado !== 'brownie' && tipoVasoSeleccionado !== 'cheescake') {
+      let normales = 0;
+      toppings.forEach(top => {
+        if (configPrecios.extras[top]) {
+          precioFinal += configPrecios.extras[top];
+        } else if (top !== "Ninguno") {
+          normales++;
+        }
+      });
+      if (normales > 1) {
+        precioFinal += (normales - 1) * 2;
+      }
+    }
+
+    let nombreFinal = `${productoSeleccionado} ${tamNombre}`;
+    if (tipoVasoSeleccionado === 'vellana') nombreFinal += " (Vellana)";
+    else if (tipoVasoSeleccionado === 'oreo') nombreFinal += " (Oreo)";
+    else if (tipoVasoSeleccionado === 'brownie') nombreFinal += " (Brownie)";
+    else if (tipoVasoSeleccionado === 'cheescake') nombreFinal += " (Cheesecake)";
+    else if (tipoVasoSeleccionado === 'deli-fresa') nombreFinal += " (D'eli Fresa)";
+
+    if (toppings.length > 0 && toppings[0] !== "Ninguno") {
+      nombreFinal += ` + Toppings: ${toppings.join(", ")}`;
+    }
+    if (jarabe && jarabe !== "Ninguno") {
+      nombreFinal += ` + Jarabe: ${jarabe}`;
+    }
+
+    // esVellana detect
     const esVellana = tipoVasoSeleccionado === 'vellana';
+    agregarAlCarrito(nombreFinal, precioFinal, esVellana);
 
-    const nombre = `${productoSeleccionado} ${tamSeleccionado.value} + Toppings: ${toppingsFinal.join(", ")}`;
-    agregarAlCarrito(nombre, precio, esVellana);
-
-    // cerrar y resetear
     modalVaso.style.display = "none";
     tipoVasoSeleccionado = null;
-  });
+  }
 
   // añadir al carrito
   btnAddCharola.addEventListener("click", () => {
@@ -298,33 +475,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // --- Productos con tamaños ---
-  const preciosConCrema = {
-    "Fresas": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
-    "Uvas": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
-    "Durazno": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
-    "Manzana": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
-    "Zarzamora": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
-    "Con Yogurth": { "Ch.": 35, "Med.": 40, "Gr.": 50, "1/2": 85 },
-    "Lagrimitas": { "Ch.": 10, "Gr.": 15 },
-    "Coffe": { "Ch.": 12, "Gr.": 15 },
-    "Arroz con Leche": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-  };
-
-  const preciosVellana = {
-    "Fresas": { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
-    "Durazno": { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
-    "Uvas": { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
-    "Manzana": { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
-    "Zarzamora": { "Ch.": 45, "Med.": 55, "Tazón": 70, "Gr.": 90 },
-  }
+  const preciosConCrema = configPrecios.conCrema;
+  const preciosVellana = configPrecios.vellana;
 
   // --- Precios Fruta Loca ---
-  const preciosFrutaLoca = {
-    "Ch.": 30,
-    "Med.": 35,
-    "Gr.": 45,
-    "Tazón": 60
-  };
+  const preciosFrutaLoca = configPrecios.frutaLoca;
 
   // --- Modal Fruta Loca ---
   const modalFrutaLoca = document.getElementById("modal-fruta-loca");
@@ -467,26 +622,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // --- Producto con sabores (De Agua) ---
-  const saboresAgua = {
-    "Uva": 10,
-    "Fresa": 10,
-    "Mora Azul": 10,
-    "Grosella": 10,
-    "Limón": 10
-  };
+  const saboresAgua = configPrecios.agua;
 
   // --- Productos con precio fijo (sin modal) ---
-  const preciosFijos = {
-    "Tres Leches de Durazno": 28,
-    "Flan Casero de Vainilla": 15,
-    "Flan Napolitano": 30,
-    "Pay de Limón": 45,
-    "Pastel Imposible": 45,
-    "Pastel de Chocolate": 45,
-    "Pastel de Beso de Angel": 50,
-    "Maruchan": 25,
-    "Cigarros": 7
-  };
+  const preciosFijos = configPrecios.fijos;
 
   // --- Cerrar modal ---
   cerrarModal.addEventListener("click", () => modal.style.display = "none");

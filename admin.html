@@ -61,7 +61,7 @@
                         <h3>Charola Loca</h3>
                         <p class="desc-mini">3 frutas + Toppings</p>
                         <button class="btn-agregar-modal" data-tipo="charola-loca" data-producto="Charola Loca">Armar
-                            Charola ($40)</button>
+                            Charola <span data-fijo-precio="Charola Loca"></span></button>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,8 @@
                     <div class="card-info">
                         <h3>Charola Frutas</h3>
                         <p class="desc-mini">3 frutas, yogurth, toppings</p>
-                        <button class="btn-agregar-modal btn-charola">Armar Charola ($40+)</button>
+                        <button class="btn-agregar-modal btn-charola">Armar Charola <span
+                                data-fijo-precio="Charola Frutas"></span></button>
                     </div>
                 </div>
 
@@ -194,45 +195,42 @@
                     <img src="img/gelatinas/yogurth.png">
                     <div class="card-info">
                         <h3>Con Yogurth</h3>
-                        <button class="btn-add-direct" onclick="agregarAlCarrito('Gelatina Yogurth', 30)">$30</button>
+                        <button class="btn-add-direct" data-fijo="Gelatina Yogurth"></button>
                     </div>
                 </div>
                 <div class="card-producto">
                     <img src="img/gelatinas/agua.jpg">
                     <div class="card-info">
                         <h3>De Agua</h3>
-                        <button class="btn-agregar-modal" data-producto="Agua">Elegir Sabor ($10)</button>
+                        <button class="btn-agregar-modal" data-producto="Agua">Elegir Sabor</button>
                     </div>
                 </div>
                 <div class="card-producto">
                     <img src="img/gelatinas/durazno.jpg">
                     <div class="card-info">
                         <h3>3 Leches Durazno</h3>
-                        <button class="btn-add-direct"
-                            onclick="agregarAlCarrito('Tres Leches de Durazno', 28)">$28</button>
+                        <button class="btn-add-direct" data-fijo="Tres Leches de Durazno"></button>
                     </div>
                 </div>
                 <div class="card-producto">
                     <img src="img/gelatinas/vainilla.jpg">
                     <div class="card-info">
                         <h3>Flan Vainilla</h3>
-                        <button class="btn-add-direct"
-                            onclick="agregarAlCarrito('Flan Casero de Vainilla', 15)">$15</button>
+                        <button class="btn-add-direct" data-fijo="Flan Casero de Vainilla"></button>
                     </div>
                 </div>
                 <div class="card-producto">
                     <img src="img/deli.png">
                     <div class="card-info">
                         <h3>De Rompope</h3>
-                        <button class="btn-add-direct"
-                            onclick="agregarAlCarrito('Gelatina de Rompope', 20)">$20</button>
+                        <button class="btn-add-direct" data-fijo="Gelatina de Rompope"></button>
                     </div>
                 </div>
                 <div class="card-producto">
                     <img src="img/deli.png">
                     <div class="card-info">
                         <h3>De Chamoy</h3>
-                        <button class="btn-add-direct" onclick="agregarAlCarrito('Gelatina de Chamoy', 20)">$20</button>
+                        <button class="btn-add-direct" data-fijo="Gelatina de Chamoy"></button>
                     </div>
                 </div>
             </div>
@@ -244,7 +242,7 @@
                 <div class="card-producto">
                     <img src="img/rebanadas/flan.jpg">
                     <div class="card-info">
-                        <h3>Flan Napolitano ($30)</h3>
+                        <h3>Flan Napolitano <span data-fijo-precio="Flan Napolitano"></span></h3>
                         <button class="btn-agregar-modal" data-producto="Flan Napolitano">Agregar</button>
                     </div>
                 </div>
@@ -252,7 +250,7 @@
                 <div class="card-producto">
                     <img src="img/rebanadas/pay.jpg">
                     <div class="card-info">
-                        <h3>Pay de Limón ($45)</h3>
+                        <h3>Pay de Limón <span data-fijo-precio="Pay de Limón"></span></h3>
                         <button class="btn-agregar-modal" data-producto="Pay de Limón">Agregar</button>
                     </div>
                 </div>
@@ -260,7 +258,7 @@
                 <div class="card-producto">
                     <img src="img/rebanadas/imposible.jpg">
                     <div class="card-info">
-                        <h3>Pastel Imposible ($45)</h3>
+                        <h3>Pastel Imposible <span data-fijo-precio="Pastel Imposible"></span></h3>
                         <button class="btn-agregar-modal" data-producto="Pastel Imposible">Agregar</button>
                     </div>
                 </div>
@@ -268,7 +266,7 @@
                 <div class="card-producto">
                     <img src="img/rebanadas/choco.jpg">
                     <div class="card-info">
-                        <h3>Pastel Chocolate ($45)</h3>
+                        <h3>Pastel Chocolate <span data-fijo-precio="Pastel de Chocolate"></span></h3>
                         <button class="btn-agregar-modal" data-producto="Pastel de Chocolate">Agregar</button>
                     </div>
                 </div>
@@ -276,7 +274,7 @@
                 <div class="card-producto">
                     <img src="img/rebanadas/beso.jpg">
                     <div class="card-info">
-                        <h3>Beso de Angel ($50)</h3>
+                        <h3>Beso de Angel <span data-fijo-precio="Pastel de Beso de Angel"></span></h3>
                         <button class="btn-agregar-modal" data-producto="Pastel de Beso de Angel">Agregar</button>
                     </div>
                 </div>
@@ -284,7 +282,7 @@
                 <div class="card-producto">
                     <img src="img/deli.png">
                     <div class="card-info">
-                        <h3>Pastel de Oreo de 3 leches ($50)</h3>
+                        <h3>Pastel de Oreo de 3 leches <span data-fijo-precio="Pastel de Oreo de 3 leches"></span></h3>
                         <button class="btn-agregar-modal" data-producto="Pastel de Oreo de 3 leches">Agregar</button>
                     </div>
                 </div>
@@ -292,7 +290,7 @@
                 <div class="card-producto">
                     <img src="img/deli.png">
                     <div class="card-info">
-                        <h3>Pastel de 3 leches ($40)</h3>
+                        <h3>Pastel de 3 leches <span data-fijo-precio="Pastel de 3 leches"></span></h3>
                         <button class="btn-agregar-modal" data-producto="Pastel de 3 leches">Agregar</button>
                     </div>
                 </div>
@@ -305,8 +303,8 @@
                     <img src="img/extras/arroz.jpg">
                     <div class="card-info">
                         <h3>Arroz con Leche</h3>
-                        <button class="btn-agregar-modal" data-producto="Arroz con Leche" data-tipo="vaso">Elegir
-                            ($30+)</button>
+                        <button class="btn-agregar-modal" data-producto="Arroz con Leche"
+                            data-tipo="vaso">Elegir</button>
                     </div>
                 </div>
             </div>
@@ -511,7 +509,8 @@
         </div>
     </div>
 
-    <script src="admin.js?v=2"></script>
+    <script src="data.js"></script>
+    <script src="admin.js?v=3"></script>
 </body>
 
 </html>

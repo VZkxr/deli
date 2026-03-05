@@ -4,56 +4,39 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- Variables de Estado ---
     let carrito = [];
 
-    // Configuración de Precios (Copiados y adaptados de script.js)
-    const preciosConCrema = {
-        "Fresas": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-        "Uvas": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-        "Durazno": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-        "Manzana": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-        "Zarzamora": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-        "Arroz con Leche": { "Ch.": 30, "Med.": 35, "Gr.": 45, "1/2": 85 },
-    };
+    // Configuración de Precios centralizada en data.js
+    const preciosConCrema = configPrecios.conCrema;
+    const preciosVellana = configPrecios.vellana;
+    const preciosFrutaLoca = configPrecios.frutaLoca;
+    const preciosOreo = configPrecios.oreo;
+    const preciosBrownie = configPrecios.brownie;
+    const preciosCheescake = configPrecios.cheescake;
+    const preciosDeliFresa = configPrecios.deliFresa;
+    const saboresAgua = configPrecios.agua;
+    const preciosExtras = configPrecios.extras;
 
-    const preciosVellana = {
-        "Fresas": { "Ch.": 55, "Med.": 65, "Gr.": 90 },
-        "Durazno": { "Ch.": 55, "Med.": 65, "Gr.": 90 },
-        "Uvas": { "Ch.": 55, "Med.": 65, "Gr.": 90 },
-        "Manzana": { "Ch.": 55, "Med.": 65, "Gr.": 90 },
-        "Zarzamora": { "Ch.": 55, "Med.": 65, "Gr.": 90 },
-    };
+    const listToppingsGeneral = listasToppings.general;
+    const listToppingsDeliFresa = listasToppings.deliFresa;
+    const listJarabes = listasToppings.jarabes;
 
-    const preciosFrutaLoca = {
-        "Ch.": 30, "Med.": 35, "Gr.": 45, "Tazón": 60
-    };
+    // --- Renderizado de precios fijos en botones ---
+    document.querySelectorAll("[data-fijo]").forEach(btn => {
+        const nombre = btn.dataset.fijo;
+        const precio = configPrecios.fijos[nombre];
+        if (precio) {
+            btn.textContent = `$${precio}`;
+            btn.addEventListener("click", () => agregarAlCarrito(nombre, precio));
+        }
+    });
 
-    const preciosOreo = { "Ch.": 55, "Med.": 65, "Gr.": 90 };
-    const preciosBrownie = { "Ch.": 55, "Med.": 75, "Gr.": 110 };
-    const preciosCheescake = { "Ch.": 55, "Med.": 75, "Gr.": 110 };
-    const preciosDeliFresa = { "Ch.": 70, "Med.": 80, "Gr.": 115 };
-
-    const saboresAgua = {
-        "Uva": 10, "Fresa": 10, "Mora Azul": 10, "Grosella": 10, "Limón": 10
-    };
-
-    const preciosExtras = {
-        "Hershey's extra": 3,
-        "Avellana extra": 3,
-        "Cheescake": 5,
-        "Galleta Brownie": 5
-    };
-
-    const listToppingsGeneral = [
-        "Kranky", "Chispas", "Chocochispas", "Nuez", "Pasas", "Granola", "Canela", "Lechera", "Chantilli", "Ninguno",
-        "Hershey's extra", "Avellana extra", "Cheescake", "Galleta Brownie"
-    ];
-
-    const listToppingsDeliFresa = [
-        "Cubitos Cheescake", "Galleta Brownie", "Galleta Oreo"
-    ];
-
-    const listJarabes = [
-        "Mermelada", "Hershey's", "Avellana", "Lechera", "Ninguno"
-    ];
+    // --- Renderizado de etiquetas de precio fijos ---
+    document.querySelectorAll("span[data-fijo-precio]").forEach(span => {
+        const nombre = span.dataset.fijoPrecio;
+        const precio = configPrecios.fijos[nombre];
+        if (precio) {
+            span.textContent = `($${precio})`;
+        }
+    });
 
     // --- Variables Globales para Modales ---
     let pSeleccionado = null;
@@ -582,15 +565,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalRebanadas = document.getElementById("modal-rebanadas");
     document.querySelectorAll("[data-producto^='Pastel'], [data-producto^='Flan'], [data-producto^='Pay']").forEach(btn => {
         btn.addEventListener("click", () => {
-            // Hardcodeo rápido de precios basado en texto del botón o HTML
-            // Mejor: buscar en lista "Precios fijos" si existiera, o pasar precio en data-atribute (mas limpio)
-            // Aquí haremos un switch rapido
             const prod = btn.dataset.producto;
-            let precio = 45; // default
-            if (prod.includes("Flan Napolitano")) precio = 30;
-            if (prod.includes("Beso")) precio = 50;
-            if (prod === "Pastel de Oreo de 3 leches") precio = 50;
-            if (prod === "Pastel de 3 leches") precio = 40;
+            let precio = configPrecios.fijos[prod] || 45; // default 45 si no existe
 
             pRebanada = { nombre: prod, precio: precio };
             document.getElementById("titulo-rebanadas").textContent = prod;
