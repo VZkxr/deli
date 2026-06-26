@@ -80,7 +80,7 @@ const menuRenderData = {
         { nombre: "Fresas", img: "img/f_loca/fresas.jpg", desc: "Las clásicas fresas de D'eli postres, bañadas en Chamoy y Tajín.", tipo: "fruta-loca" },
         { nombre: "Manzana", img: "img/f_loca/manzana.jpg", desc: "Finos cortes de manzana, acompañados con la base de Chamoy y Tajín.", tipo: "fruta-loca" },
         { nombre: "Uvas", img: "img/f_loca/uvas.jpg", desc: "Uvas tan dulces que se integran de forma intensa al Chamoy y al Tajín.", tipo: "fruta-loca" },
-        { nombre: "Charola loca", img: "img/con_crema/char.png", desc: "Arma tu trinidad de 3 productos a elegir entre fresas, manzana y uvas, con una cobertura de Chamoy y Tajín.", tipo: "charola-loca", precioHTML: '<span class="precio">$40</span>' }
+        { nombre: "Charola loca", img: "img/salados/char.jpg", desc: "Arma tu trinidad de 3 productos a elegir entre fresas, manzana y uvas, con una cobertura de Chamoy y Tajín.", tipo: "charola-loca", precioHTML: '<span class="precio">$40</span>' }
     ],
     conCremaVaso: [
         { nombre: "Fresas", img: "img/con_crema/fresas.png", desc: "Deliciosas fresas cubiertas de receta secreta." },
@@ -111,7 +111,7 @@ const menuRenderData = {
         { nombre: "Zarzamora", img: "img/deli.png", desc: "Brownie casero para acompañar." }
     ],
     conCremaCheesecake: [
-        { nombre: "Fresas", img: "img/deli.png", desc: "Cubitos de cheescake D'eli extra suaves." },
+        { nombre: "Fresas", img: "img/chees/ch_fres1.jpg", desc: "Cubitos de cheescake D'eli extra suaves." },
         { nombre: "Uvas", img: "img/deli.png", desc: "Cubitos de cheescake D'eli extra suaves." },
         { nombre: "Durazno", img: "img/deli.png", desc: "Cubitos de cheescake D'eli extra suaves." },
         { nombre: "Manzana", img: "img/deli.png", desc: "Cubitos de cheescake D'eli extra suaves." },
