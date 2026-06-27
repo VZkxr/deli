@@ -144,63 +144,79 @@ h2{
     padding: 16px;
 }
 
-/* --- ESTILOS BOTÓN INSTAGRAM CON ANIMACIÓN --- */
-
-/* Contenedor para centrar y separar */
-.instagram-callout-container {
-    margin: 25px 0; /* Espacio arriba y abajo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px; /* Espacio entre "Síguenos" y el botón */
-}
-
-/* Texto "Síguenos👉" */
-.siguenos-texto {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--colorPrimario);
-}
-
-/* Botón de Instagram */
+/* --- BOTÓN FLOTANTE INSTAGRAM (Degradado original) --- */
 .btn-instagram-animado {
+    position: fixed;
+    bottom: 75px; 
+    left: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-size: 1rem;
     font-weight: bold;
     color: white;
-    /* Gradiente característico de Instagram */
+    /* Degradado de Instagram aplicado como fondo */
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    border-radius: 25px; /* Bordes redondeados */
+    border-radius: 50px;
     text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Sombra neutra para que resalte sobre el fondo */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 3000;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    /* Aplicar la animación de balanceo (wobble) para llamar la atención */
-    /* Nombre | Duración | Función de tiempo | Retraso | Iteraciones */
     animation: wobble-atencion 2s ease-in-out infinite;
 }
 
-/* Ícono dentro del botón */
-.btn-instagram-animado i {
+/* El logo se mantiene blanco para que resalte sobre el gradiente */
+.btn-instagram-animado svg {
     margin-right: 8px;
-    font-size: 1.3rem;
+    fill: white;
 }
 
-/* Efecto al pasar el mouse: detiene la animación y lo agranda un poco */
+/* Hover: Pausa la animación y aumenta la sombra */
 .btn-instagram-animado:hover {
-    animation-play-state: paused; /* Pausa la animación */
-    transform: scale(1.05); /* Crece ligeramente */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    animation-play-state: paused;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Definición de la animación de balanceo (Wobble) */
+/* --- BOTÓN FLOTANTE TIKTOK --- */
+.btn-tiktok-flotante {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #010101;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: -3px 3px 0px #25F4EE, 3px -3px 0px #FE2C55;
+    z-index: 3000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: wobble-atencion 2s ease-in-out infinite; 
+}
+
+.btn-tiktok-flotante svg {
+    margin-right: 8px;
+    fill: white;
+}
+
+.btn-tiktok-flotante:hover {
+    animation-play-state: paused;
+    transform: scale(1.05);
+    box-shadow: -5px 5px 0px #25F4EE, 5px -5px 0px #FE2C55;
+}
+
+/* Animación compartida */
 @keyframes wobble-atencion {
     0% { transform: translateX(0%); }
-    15% { transform: translateX(-5px) rotate(-2deg); } /* Izquierda leve y rotación */
-    30% { transform: translateX(4px) rotate(2deg); }   /* Derecha leve y rotación */
+    15% { transform: translateX(-5px) rotate(-2deg); }
+    30% { transform: translateX(4px) rotate(2deg); }
     45% { transform: translateX(-3px) rotate(-1deg); }
     60% { transform: translateX(2px) rotate(1deg); }
     75% { transform: translateX(-1px); }
