@@ -223,7 +223,26 @@
                         <h2>Elige un jarabe</h2>
                         <form id="form-vaso-jarabe" class="form-opciones">
                         </form>
-                        <button id="btn-add-vaso" class="btn-agregar">Añadir</button>
+                        <button id="btn-add-vaso" class="btn-agregar">Siguiente</button>
+                    </div>
+
+                    <div id="paso-nutella" class="paso-vaso" style="display:none;">
+                        <h2 id="titulo-nutella">¿Deseas agregar crema de Nutella?</h2>
+                        <form id="form-vaso-nutella" class="form-opciones">
+                            <label>
+                                <input type="radio" name="opcion_nutella" value="No" checked>
+                                <span>No (Solo crema tradicional)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="opcion_nutella" value="Combinar">
+                                <span>Combinar con tradicional</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="opcion_nutella" value="Sí">
+                                <span>Sí (Solo Nutella)</span>
+                            </label>
+                        </form>
+                        <button id="btn-finalizar-vaso" class="btn-agregar">Añadir</button>
                     </div>
                 </div>
             </div>

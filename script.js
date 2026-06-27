@@ -216,16 +216,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const pasoTamano = document.getElementById("paso-tamano");
   const pasoToppingVaso = document.getElementById("paso-topping-vaso");
   const pasoJarabeVaso = document.getElementById("paso-jarabe");
+  const pasoNutella = document.getElementById("paso-nutella"); // NUEVO
 
   // formularios
   const formTamano = document.getElementById("form-vaso-tamano");
   const formToppingVaso = document.getElementById("form-vaso-topping");
   const formJarabeVaso = document.getElementById("form-vaso-jarabe");
+  const formNutella = document.getElementById("form-vaso-nutella"); // NUEVO
 
   // botones
   const btnSiguienteTamano = document.getElementById("btn-siguiente-tamano");
   const btnPaso2Vaso = document.getElementById("btn-paso2-vaso");
   const btnAddVaso = document.getElementById("btn-add-vaso");
+  const btnFinalizarVaso = document.getElementById("btn-finalizar-vaso"); // NUEVO
 
   // textos dinámicos
   const tituloVaso = document.getElementById("titulo-vaso");
@@ -233,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let productoSeleccionado = null;
   let tipoVasoSeleccionado = null;
+  let costoExtraNutella = 10; // Variable global para el costo dinámico
 
   // Abrir modal de vaso (delegación de eventos para botones dinámicos)
   document.body.addEventListener("click", (e) => {
@@ -240,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const btn = e.target;
       const tipo = btn.dataset.tipo;
 
-      if (['vaso', 'vellana', 'oreo', 'cheescake', 'deli-fresa'].includes(tipo)) {
+      if (['vaso', 'vellana', 'oreo', 'brownie', 'cheescake', 'deli-fresa'].includes(tipo)) {
         productoSeleccionado = btn.dataset.producto;
         tipoVasoSeleccionado = tipo;
 
@@ -253,15 +257,18 @@ document.addEventListener("DOMContentLoaded", function () {
         pasoTamano.style.display = "block";
         pasoToppingVaso.style.display = "none";
         pasoJarabeVaso.style.display = "none";
+        pasoNutella.style.display = "none";
         formTamano.innerHTML = "";
         formToppingVaso.innerHTML = "";
         formJarabeVaso.innerHTML = "";
+        formNutella.reset(); // Vuelve a seleccionar "No" por defecto
         btnSiguienteTamano.classList.add("btn-disabled");
 
         // Cargar precios
         let precios = configPrecios.conCrema[productoSeleccionado];
         if (tipo === 'vellana') precios = configPrecios.vellana[productoSeleccionado];
         else if (tipo === 'oreo') precios = configPrecios.oreo;
+        else if (tipo === 'brownie') precios = configPrecios.brownie;
         else if (tipo === 'cheescake') precios = configPrecios.cheescake;
         else if (tipo === 'deli-fresa') precios = configPrecios.deliFresa;
 
@@ -291,12 +298,8 @@ document.addEventListener("DOMContentLoaded", function () {
           formJarabeVaso.innerHTML += `<label><input type="radio" name="jarabe" value="${jar}"> ${jar}</label>`;
         });
 
-        if (tipo === 'oreo' || tipo === 'deli-fresa') {
-          btnPaso2Vaso.textContent = "Siguiente";
-        } else {
-          btnPaso2Vaso.textContent = "Añadir";
-        }
-
+        // Como siempre van a Nutella, el botón intermedio siempre dice Siguiente
+        btnPaso2Vaso.textContent = "Siguiente";
         modalVaso.style.display = "flex";
       }
     }
@@ -329,25 +332,19 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Si cheescake van directo al carrito
-    if (tipoVasoSeleccionado === 'cheescake') {
-      finalizarVaso();
+    // Si es brownie o cheescake van directo a Nutella
+    if (tipoVasoSeleccionado === 'brownie' || tipoVasoSeleccionado === 'cheescake') {
+      mostrarPasoNutella();
       return;
     }
 
     pasoTamano.style.display = "none";
     pasoToppingVaso.style.display = "block";
-
-    // resetear precio si es normal o vellana
-    if (tipoVasoSeleccionado !== 'oreo' && tipoVasoSeleccionado !== 'deli-fresa') {
-      const precioBase = parseInt(seleccionado.dataset.precio);
-      btnPaso2Vaso.textContent = `Añadir - $${precioBase}`;
-    }
   });
 
   // lógica de "Ninguno" dinámico
   formToppingVaso.addEventListener("change", (e) => {
-    if (tipoVasoSeleccionado === 'deli-fresa') return; // radio buttons, no logic needed
+    if (tipoVasoSeleccionado === 'deli-fresa') return;
 
     const checkNinguno = formToppingVaso.querySelector("input[value='Ninguno']");
     if (e.target.value === "Ninguno" && e.target.checked) {
@@ -357,51 +354,89 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (e.target.value !== "Ninguno" && e.target.checked && checkNinguno) {
       checkNinguno.checked = false;
     }
-
-    // Actualizar texto del botón con el precio dinámico
-    const tamInput = formTamano.querySelector("input[name='tamano']:checked");
-    if (!tamInput) return;
-    let precio = parseInt(tamInput.dataset.precio);
-
-    const toppingsSeleccionados = Array.from(formToppingVaso.querySelectorAll("input:checked")).map(i => i.value);
-    let normales = 0;
-    toppingsSeleccionados.forEach(top => {
-      if (configPrecios.extras[top]) precio += configPrecios.extras[top];
-      else if (top !== "Ninguno") normales++;
-    });
-    if (normales > 1) {
-      precio += (normales - 1) * 2;
-    }
-
-    if (tipoVasoSeleccionado !== 'oreo' && tipoVasoSeleccionado !== 'deli-fresa') {
-      btnPaso2Vaso.textContent = `Añadir - $${precio}`;
-    }
   });
 
-  // paso 2 -> 3 (o final)
+  // paso 2 -> 3 (o a Nutella)
   btnPaso2Vaso.addEventListener("click", () => {
     if (tipoVasoSeleccionado === 'oreo' || tipoVasoSeleccionado === 'deli-fresa') {
       pasoToppingVaso.style.display = "none";
       pasoJarabeVaso.style.display = "block";
     } else {
-      finalizarVaso();
+      mostrarPasoNutella();
     }
   });
 
-  // jarabe -> final
-  btnAddVaso.addEventListener("click", finalizarVaso);
+  // jarabe -> Nutella
+  btnAddVaso.addEventListener("click", mostrarPasoNutella);
+
+  // --- LÓGICA DE NUTELLA Y PRECIO FINAL ---
+
+  function getPrecioActualVaso() {
+    const tamInput = formTamano.querySelector("input[name='tamano']:checked");
+    if (!tamInput) return 0;
+    let precio = parseInt(tamInput.dataset.precio);
+
+    if (tipoVasoSeleccionado !== 'deli-fresa' && tipoVasoSeleccionado !== 'brownie' && tipoVasoSeleccionado !== 'cheescake') {
+      const toppings = Array.from(formToppingVaso.querySelectorAll("input:checked")).map(i => i.value);
+      let normales = 0;
+      toppings.forEach(top => {
+        if (configPrecios.extras[top]) {
+          precio += configPrecios.extras[top];
+        } else if (top !== "Ninguno") {
+          normales++;
+        }
+      });
+      if (normales > 1) {
+        precio += (normales - 1) * 2;
+      }
+    }
+    return precio;
+  }
+
+  function mostrarPasoNutella() {
+    pasoTamano.style.display = "none";
+    pasoToppingVaso.style.display = "none";
+    pasoJarabeVaso.style.display = "none";
+    pasoNutella.style.display = "block";
+
+    // Determinar precio extra según el tamaño
+    const tamInput = formTamano.querySelector("input[name='tamano']:checked");
+    const tamNombre = tamInput ? tamInput.value.toLowerCase() : "";
+    
+    // Si contiene "1/2" o "litro", el costo es 20. Si no, 10.
+    costoExtraNutella = (tamNombre.includes("1/2") || tamNombre.includes("litro")) ? 20 : 10;
+
+    document.getElementById("titulo-nutella").textContent = `¿Por $${costoExtraNutella} más deseas agregar crema de nutella?`;
+    
+    actualizarBotonNutella();
+  }
+
+  function actualizarBotonNutella() {
+    let precioBase = getPrecioActualVaso();
+    const nutellaSeleccionada = formNutella.querySelector("input:checked");
+    
+    if (nutellaSeleccionada && nutellaSeleccionada.value !== "No") {
+      precioBase += costoExtraNutella;
+    }
+    
+    btnFinalizarVaso.textContent = `Añadir - $${precioBase}`;
+  }
+
+  formNutella.addEventListener("change", actualizarBotonNutella);
+  btnFinalizarVaso.addEventListener("click", finalizarVaso);
 
   function finalizarVaso() {
     const tamInput = formTamano.querySelector("input[name='tamano']:checked");
     if (!tamInput) return;
     const tamNombre = tamInput.value;
-    const tamPrecio = parseInt(tamInput.dataset.precio);
+
+    let precioFinal = getPrecioActualVaso();
 
     let toppings = [];
     if (tipoVasoSeleccionado === 'deli-fresa') {
       const t = formToppingVaso.querySelector("input:checked");
       if (t) toppings.push(t.value);
-    } else if (tipoVasoSeleccionado !== 'cheescake') {
+    } else if (tipoVasoSeleccionado !== 'brownie' && tipoVasoSeleccionado !== 'cheescake') {
       toppings = Array.from(formToppingVaso.querySelectorAll("input:checked")).map(i => i.value);
     }
 
@@ -411,25 +446,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (j) jarabe = j.value;
     }
 
-    let precioFinal = tamPrecio;
-
-    if (tipoVasoSeleccionado !== 'deli-fresa' && tipoVasoSeleccionado !== 'cheescake') {
-      let normales = 0;
-      toppings.forEach(top => {
-        if (configPrecios.extras[top]) {
-          precioFinal += configPrecios.extras[top];
-        } else if (top !== "Ninguno") {
-          normales++;
-        }
-      });
-      if (normales > 1) {
-        precioFinal += (normales - 1) * 2;
-      }
-    }
-
     let nombreFinal = `${productoSeleccionado} ${tamNombre}`;
     if (tipoVasoSeleccionado === 'vellana') nombreFinal += " (Vellana)";
     else if (tipoVasoSeleccionado === 'oreo') nombreFinal += " (Oreo)";
+    else if (tipoVasoSeleccionado === 'brownie') nombreFinal += " (Brownie)";
     else if (tipoVasoSeleccionado === 'cheescake') nombreFinal += " (Cheesecake)";
     else if (tipoVasoSeleccionado === 'deli-fresa') nombreFinal += " (D'eli Fresa)";
 
@@ -440,7 +460,17 @@ document.addEventListener("DOMContentLoaded", function () {
       nombreFinal += ` + Jarabe: ${jarabe}`;
     }
 
-    // esVellana detect
+    // Agregar la opción de Nutella al nombre y al precio
+    const nutellaSeleccionada = formNutella.querySelector("input:checked").value;
+    if (nutellaSeleccionada !== "No") {
+      precioFinal += costoExtraNutella;
+      if (nutellaSeleccionada === "Sí") {
+        nombreFinal += " + Solo Crema Nutella";
+      } else if (nutellaSeleccionada === "Combinar") {
+        nombreFinal += " + Combinado Tradicional/Nutella";
+      }
+    }
+
     const esVellana = tipoVasoSeleccionado === 'vellana';
     agregarAlCarrito(nombreFinal, precioFinal, esVellana);
 
