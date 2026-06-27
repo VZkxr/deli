@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
   renderPreciosMultiples("render-precios-con-crema", configPrecios.conCrema["Fresas"]);
   renderPreciosMultiples("render-precios-vellana", configPrecios.vellana["Fresas"]);
   renderPreciosMultiples("render-precios-oreo", configPrecios.oreo);
-  renderPreciosMultiples("render-precios-brownie", configPrecios.brownie);
   renderPreciosMultiples("render-precios-cheesecake", configPrecios.cheescake);
   renderPreciosMultiples("render-precios-delifresa", configPrecios.deliFresa);
 
@@ -75,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
   renderProductos("render-con-crema", menuRenderData.conCremaVaso, "vaso");
   renderProductos("render-vellana", menuRenderData.conCremaVellana, "vellana");
   renderProductos("render-oreo", menuRenderData.conCremaOreo, "oreo");
-  renderProductos("render-brownie", menuRenderData.conCremaBrownie, "brownie");
   renderProductos("render-cheesecake", menuRenderData.conCremaCheesecake, "cheescake");
   renderProductos("render-delifresa", menuRenderData.conCremaDeliFresa, "deli-fresa");
   renderProductos("render-gelatinas", menuRenderData.gelatinas);
@@ -242,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const btn = e.target;
       const tipo = btn.dataset.tipo;
 
-      if (['vaso', 'vellana', 'oreo', 'brownie', 'cheescake', 'deli-fresa'].includes(tipo)) {
+      if (['vaso', 'vellana', 'oreo', 'cheescake', 'deli-fresa'].includes(tipo)) {
         productoSeleccionado = btn.dataset.producto;
         tipoVasoSeleccionado = tipo;
 
@@ -264,7 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let precios = configPrecios.conCrema[productoSeleccionado];
         if (tipo === 'vellana') precios = configPrecios.vellana[productoSeleccionado];
         else if (tipo === 'oreo') precios = configPrecios.oreo;
-        else if (tipo === 'brownie') precios = configPrecios.brownie;
         else if (tipo === 'cheescake') precios = configPrecios.cheescake;
         else if (tipo === 'deli-fresa') precios = configPrecios.deliFresa;
 
@@ -332,8 +329,8 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Si es brownie o cheescake van directo al carrito
-    if (tipoVasoSeleccionado === 'brownie' || tipoVasoSeleccionado === 'cheescake') {
+    // Si cheescake van directo al carrito
+    if (tipoVasoSeleccionado === 'cheescake') {
       finalizarVaso();
       return;
     }
@@ -404,7 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (tipoVasoSeleccionado === 'deli-fresa') {
       const t = formToppingVaso.querySelector("input:checked");
       if (t) toppings.push(t.value);
-    } else if (tipoVasoSeleccionado !== 'brownie' && tipoVasoSeleccionado !== 'cheescake') {
+    } else if (tipoVasoSeleccionado !== 'cheescake') {
       toppings = Array.from(formToppingVaso.querySelectorAll("input:checked")).map(i => i.value);
     }
 
@@ -416,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let precioFinal = tamPrecio;
 
-    if (tipoVasoSeleccionado !== 'deli-fresa' && tipoVasoSeleccionado !== 'brownie' && tipoVasoSeleccionado !== 'cheescake') {
+    if (tipoVasoSeleccionado !== 'deli-fresa' && tipoVasoSeleccionado !== 'cheescake') {
       let normales = 0;
       toppings.forEach(top => {
         if (configPrecios.extras[top]) {
@@ -433,7 +430,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let nombreFinal = `${productoSeleccionado} ${tamNombre}`;
     if (tipoVasoSeleccionado === 'vellana') nombreFinal += " (Vellana)";
     else if (tipoVasoSeleccionado === 'oreo') nombreFinal += " (Oreo)";
-    else if (tipoVasoSeleccionado === 'brownie') nombreFinal += " (Brownie)";
     else if (tipoVasoSeleccionado === 'cheescake') nombreFinal += " (Cheesecake)";
     else if (tipoVasoSeleccionado === 'deli-fresa') nombreFinal += " (D'eli Fresa)";
 

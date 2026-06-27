@@ -27,7 +27,6 @@ const configPrecios = {
         "Tazón": 60
     },
     oreo: { "Ch.": 55, "Med.": 65, "Gr.": 90 },
-    brownie: { "Ch.": 65, "Med.": 75, "Gr.": 110 },
     cheescake: { "Ch.": 65, "Med.": 75, "Gr.": 110 },
     deliFresa: { "Ch.": 70, "Med.": 80, "Gr.": 115 },
     agua: {
@@ -56,18 +55,17 @@ const configPrecios = {
     extras: {
         "Hershey's extra": 3,
         "Avellana extra": 3,
-        "Cheescake": 5,
-        "Galleta Brownie": 5
+        "Cheescake": 5
     }
 };
 
 const listasToppings = {
     general: [
         "Kranky", "Chispas de colores", "Chispas de chocolate", "Nuez", "Pasas", "Granola", "Canela", "Lechera", "Chantilli", "Ninguno",
-        "Hershey's extra", "Avellana extra", "Cheescake", "Galleta Brownie"
+        "Hershey's extra", "Avellana extra", "Cheescake"
     ],
     deliFresa: [
-        "Cubitos Cheescake", "Galleta Brownie", "Galleta Oreo"
+        "Cubitos Cheescake", "Galleta Oreo"
     ],
     jarabes: [
         "Mermelada", "Hershey's", "Avellana", "Lechera", "Ninguno"
@@ -102,13 +100,6 @@ const menuRenderData = {
         { nombre: "Durazno", img: "img/deli.png", desc: "Disfruta el sabor base combinado con oreo." },
         { nombre: "Manzana", img: "img/deli.png", desc: "Disfruta el sabor base combinado con oreo." },
         { nombre: "Zarzamora", img: "img/deli.png", desc: "Disfruta el sabor base combinado con oreo." }
-    ],
-    conCremaBrownie: [
-        { nombre: "Fresas", img: "img/deli.png", desc: "Brownie casero para acompañar." },
-        { nombre: "Uvas", img: "img/deli.png", desc: "Brownie casero para acompañar." },
-        { nombre: "Durazno", img: "img/deli.png", desc: "Brownie casero para acompañar." },
-        { nombre: "Manzana", img: "img/deli.png", desc: "Brownie casero para acompañar." },
-        { nombre: "Zarzamora", img: "img/deli.png", desc: "Brownie casero para acompañar." }
     ],
     conCremaCheesecake: [
         { nombre: "Fresas", img: "img/chees/ch_fres1.jpg", desc: "Cubitos de cheescake D'eli extra suaves." },
