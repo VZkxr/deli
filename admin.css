@@ -475,3 +475,31 @@ body {
         border-left: 2px solid var(--colorPrimario);
     }
 }
+/* ===== Generado por el motor de flujos (js/flujo.js) ===== */
+
+/* Subtitulo de subseccion dentro de un grupo */
+.section-title-sub {
+    color: var(--colorPrimario);
+    opacity: 0.85;
+    font-size: 1rem;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    scroll-margin-top: 100px;
+}
+
+/* Cada paso del modal */
+.paso {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mensaje de error dentro del modal */
+.error-inline {
+    color: #ff6b6b;
+    font-weight: 700;
+}

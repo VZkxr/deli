@@ -25,14 +25,8 @@
                         d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </div>
-            <div id="navMenu">
-                <a href="#inicio">Inicio</a>
-                <a href="#salados">Salados</a>
-                <a href="#con-crema">Con crema</a>
-                <a href="#gelatinas">Gelatinas</a>
-                <a href="#rebanadas">Rebanadas</a>
-                <a href="#extras">Extras</a>
-            </div>
+            <!-- Los enlaces se generan desde menu.json -->
+            <div id="navMenu"></div>
         </nav>
         <!--//menu -->
 
@@ -67,245 +61,8 @@
                 </a>
             </p>
 
-            <h1 id="salados" class="title">SALADOS</h1>
-            <h2>Fruta loca</h2>
-            <div id="render-precios-fruta-loca" class="precios-multiples"></div>
-
-            <div id="render-fruta-loca" class="productos">
-            </div>
-            <!-- <h2>Ups! Hoy no contamos con especiales</h2> -->
-
-            <h1 id="con-crema" class="title">CON CREMA</h1>
-            <h3>TODOS incluyen un topping a escoger, a partir de 2 se cobran $2 más</h3>
-            <!-- Sub-sección En Charola -->
-            <h2>En Charola</h2>
-            <div class="productos">
-                <div class="producto-item">
-                    <img src="img/con_crema/char.png" alt="Charola de Frutas">
-                    <div class="detalle">
-                        <div class="titulo-precio">
-                            <h2>Charola de Frutas</h2>
-                            <span class="linea"></span>
-                            <span class="precio">$45</span>
-                        </div>
-                        <p>Incluye 3 productos a elegir entre fresas, uvas, manzana, zarzamora, durazno y gelatina
-                            con
-                            yogurth.</p>
-                        <button class="btn-agregar btn-charola">Armar charola</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal especial para la charola (Carrusel de pasos) -->
-            <div id="modal-charola" class="modal">
-                <div class="modal-contenido">
-                    <span id="cerrarCharola" class="cerrar">&times;</span>
-
-                    <!-- Paso 1: Frutas -->
-                    <div id="paso-frutas" class="paso-charola">
-                        <h2>Armar Charola</h2>
-                        <p>Selecciona 3 productos:</p>
-                        <form id="form-charola-frutas" class="form-opciones">
-                            <label>
-                                <input type="checkbox" name="fruta" value="Fresas">
-                                <span>Fresas</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" name="fruta" value="Uvas">
-                                <span>Uvas</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" name="fruta" value="Manzana">
-                                <span>Manzanas</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" name="fruta" value="Zarzamora">
-                                <span>Zarzamora</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" name="fruta" value="Durazno">
-                                <span>Durazno</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" name="fruta" value="Gelatina con yogurth">
-                                <span>Gelatina con yogurth</span>
-                            </label>
-                        </form>
-                        <button id="btn-siguiente-frutas" class="btn-agregar btn-disabled">Siguiente</button>
-                        <p id="error-charola-frutas" class="error-inline" style="display:none; margin-top:8px;">
-                            Debes escoger 3 opciones
-                        </p>
-                    </div>
-
-                    <!-- Paso 2: Toppings -->
-                    <div id="paso-topping" class="paso-charola" style="display:none;">
-                        <h2>Elige toppings (opcional)</h2>
-                        <div class="scroll-toppings">
-                            <form id="form-charola-topping" class="form-opciones">
-                                <label>
-                                    <input type="checkbox" name="topping" value="Kranky">
-                                    <span>Kranky</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chispas de colores">
-                                    <span>Chispas de colores</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chispas de chocolate">
-                                    <span>Chispas de chocolate</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Nuez">
-                                    <span>Nuez</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Pasas">
-                                    <span>Pasas</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Granola">
-                                    <span>Granola</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Canela">
-                                    <span>Canela</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Lechera">
-                                    <span>Lechera</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Chantilli">
-                                    <span>Chantilli</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="topping" value="Ninguno">
-                                    <span>Ninguno</span>
-                                </label>
-                            </form>
-                        </div>
-                        <button id="btn-add-charola" class="btn-agregar">Añadir - $45</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================ SUB-SECCIÓN EN VASO ================ -->
-            <h2>En Vaso</h2>
-            <!-- Modal Con Crema (En vaso) -->
-            <div id="modal-vaso" class="modal">
-                <div class="modal-contenido">
-                    <span id="cerrarVaso" class="cerrar">&times;</span>
-
-                    <!-- Paso 1: Tamaño -->
-                    <div id="paso-tamano" class="paso-vaso">
-                        <h2 id="titulo-vaso"></h2>
-                        <p>Selecciona un tamaño:</p>
-                        <form id="form-vaso-tamano" class="form-opciones">
-                            <!-- Botones generados dinámicamente según preciosConCrema -->
-                        </form>
-                        <button id="btn-siguiente-tamano" class="btn-agregar btn-disabled">Siguiente</button>
-                        <p id="error-vaso-tamano" class="error-inline" style="display:none; margin-top:8px;">
-                            Debes escoger un tamaño
-                        </p>
-                    </div>
-
-                    <!-- Paso 2: Toppings -->
-                    <div id="paso-topping-vaso" class="paso-vaso" style="display:none;">
-                        <h2>Elige toppings (opcional)</h2>
-                        <div class="scroll-toppings">
-                            <form id="form-vaso-topping" class="form-opciones">
-                            </form>
-                        </div>
-                        <button id="btn-paso2-vaso" class="btn-agregar">Siguiente</button>
-                    </div>
-
-                    <!-- Paso 3: Jarabes -->
-                    <div id="paso-jarabe" class="paso-vaso" style="display:none;">
-                        <h2>Elige un jarabe</h2>
-                        <form id="form-vaso-jarabe" class="form-opciones">
-                        </form>
-                        <button id="btn-add-vaso" class="btn-agregar">Siguiente</button>
-                    </div>
-
-                    <div id="paso-nutella" class="paso-vaso" style="display:none;">
-                        <h2 id="titulo-nutella">¿Deseas agregar crema de Nutella?</h2>
-                        <form id="form-vaso-nutella" class="form-opciones">
-                            <label>
-                                <input type="radio" name="opcion_nutella" value="No" checked>
-                                <span>No (Solo crema tradicional)</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="opcion_nutella" value="Combinar">
-                                <span>Combinar con tradicional</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="opcion_nutella" value="Sí">
-                                <span>Sí (Solo Nutella)</span>
-                            </label>
-                        </form>
-                        <button id="btn-finalizar-vaso" class="btn-agregar">Añadir</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bloque de precios múltiples -->
-            <div id="render-precios-con-crema" class="precios-multiples"></div>
-
-            <div id="render-con-crema" class="productos">
-            </div>
-
-            <!-- ================ SUB-SECCIÓN CREMA-VELLANA ================ -->
-            <h2>En Vaso (Recubierto de Crema-Vellana)</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Fruta con crema en vaso recubierto de
-                crema de avellanas y un topping a elegir</p>
-            <div id="render-precios-vellana" class="precios-multiples"></div>
-            <div id="render-vellana" class="productos"></div>
-
-            <h2>En Vaso (Oreo)</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Fruta con crema y capas de galleta
-                oreo molida, un topping a elegir y un jarabe</p>
-            <div id="render-precios-oreo" class="precios-multiples"></div>
-            <div id="render-oreo" class="productos"></div>
-
-
-            <h2>En Vaso (Cheesecake)</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Fruta con crema, cubitos de nuestro
-                D'elicioso cheesecake casero y lechera</p>
-            <div id="render-precios-cheesecake" class="precios-multiples"></div>
-            <div id="render-cheesecake" class="productos"></div>
-
-            <h2>En Vaso (D'eli fresa)</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">Vaso recubierto de avellana, fruta
-                con crema, cubitos o galleta y jarabe de tu preferencia</p>
-            <div id="render-precios-delifresa" class="precios-multiples"></div>
-            <div id="render-delifresa" class="productos"></div>
-
-            <!-- =================================================== -->
-            <!-- ================ SECCIÓN GELATINAS ================ -->
-            <!-- =================================================== -->
-            <h1 id="gelatinas" class="title">GELATINAS</h1>
-
-            <div id="render-gelatinas" class="productos">
-            </div>
-            <h1 id="rebanadas" class="title">REBANADAS</h1>
-            <!-- Modal para Rebanadas -->
-            <div id="modal-rebanadas" class="modal">
-                <div class="modal-contenido">
-                    <span id="cerrarRebanadas" class="cerrar">&times;</span>
-                    <h2 id="titulo-rebanadas"></h2>
-                    <p>¿Agregar Lechera?</p>
-                    <div class="opciones-precio">
-                        <button id="btn-lechera-si">Sí</button>
-                        <button id="btn-lechera-no">No</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="render-rebanadas" class="productos">
-            </div>
-            <h1 id="extras" class="title">EXTRAS</h1>
-
-            <div id="render-extras" class="productos">
-            </div>
+            <!-- Todo el menú se genera desde menu.json -->
+            <div id="menu"></div>
         </div>
         <!-- //CONTENT-->
         <footer class="text-center">
@@ -313,87 +70,14 @@
         </footer>
     </div>
 
-    <script src="data.js"></script>
-    <script src="script.js"></script>
-
-    <!-- Modal Fruta Loca -->
-    <div id="modal-fruta-loca" class="modal">
-        <div class="modal-contenido">
-            <span id="cerrarFrutaLoca" class="cerrar">&times;</span>
-
-            <!-- Paso 1: Tamaño -->
-            <div id="paso-fl-tamano" class="paso-fl">
-                <h2 id="titulo-fl"></h2>
-                <p>Selecciona un tamaño:</p>
-                <form id="form-fl-tamano" class="form-opciones">
-                    <!-- Se llena dinamicamente -->
-                </form>
-                <button id="btn-next-fl-tamano" class="btn-agregar btn-disabled">Siguiente</button>
-                <p id="error-fl-tamano" class="error-inline" style="display:none; margin-top:8px;">
-                    Debes escoger un tamaño
-                </p>
-            </div>
-
-            <!-- Paso 2: Miguelito -->
-            <div id="paso-fl-miguelito" class="paso-fl" style="display:none;">
-                <h2>Escoge el sabor de tu miguelito:</h2>
-                <form id="form-fl-miguelito" class="form-opciones">
-                    <label>
-                        <input type="radio" name="miguelito" value="Pelón sandía">
-                        <span>Pelón sandía</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="miguelito" value="Fresa-moy">
-                        <span>Fresa-moy</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="miguelito" value="Uva">
-                        <span>Uva</span>
-                    </label>
-                </form>
-                <button id="btn-next-fl-miguelito" class="btn-agregar btn-disabled">Siguiente</button>
-                <p id="error-fl-miguelito" class="error-inline" style="display:none; margin-top:8px;">
-                    Debes escoger un sabor
-                </p>
-            </div>
-
-            <!-- Paso 3: Gomitas -->
-            <div id="paso-fl-gomitas" class="paso-fl" style="display:none;">
-                <h2>Escoge tus gomitas:</h2>
-                <form id="form-fl-gomitas" class="form-opciones">
-                    <label>
-                        <input type="radio" name="gomitas" value="Gusanito enchilada">
-                        <span>Gusanito enchilada</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="gomitas" value="Fruta enchilada">
-                        <span>Fruta enchilada</span>
-                    </label>
-                </form>
-                <button id="btn-add-fl" class="btn-agregar">Añadir</button>
-                <p id="error-fl-gomitas" class="error-inline" style="display:none; margin-top:8px;">
-                    Debes escoger una gomita
-                </p>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Modal de opciones -->
-    <div id="modal-precios" class="modal">
-        <div class="modal-contenido">
-            <span id="cerrarModal" class="cerrar">&times;</span>
-            <h2 id="modal-titulo"></h2>
-            <p>Selecciona un tamaño:</p>
-            <div id="opciones-precio" class="opciones-precio">
-                <!-- Aquí se insertan dinámicamente los precios -->
-            </div>
-        </div>
+    <!-- Modal único: el motor de pasos pinta aquí adentro -->
+    <div id="modal-flujo" class="modal">
+        <div class="modal-contenido"></div>
     </div>
 
     <!-- Botón flotante para enviar pedido -->
     <button id="btn-enviar" class="btn-enviar" disabled>
-        <svg xmlns="<svg xmlns=" http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
             style="vertical-align: middle; margin-right: 6px; fill: white;">
             <path
                 d="M 12.011719 2 C 6.5057187 2 2.0234844 6.478375 2.0214844 11.984375 C 2.0204844 13.744375 2.4814687 15.462563 3.3554688 16.976562 L 2 22 L 7.2324219 20.763672 C 8.6914219 21.559672 10.333859 21.977516 12.005859 21.978516 L 12.009766 21.978516 C 17.514766 21.978516 21.995047 17.499141 21.998047 11.994141 C 22.000047 9.3251406 20.962172 6.8157344 19.076172 4.9277344 C 17.190172 3.0407344 14.683719 2.001 12.011719 2 z M 12.009766 4 C 14.145766 4.001 16.153109 4.8337969 17.662109 6.3417969 C 19.171109 7.8517969 20.000047 9.8581875 19.998047 11.992188 C 19.996047 16.396187 16.413812 19.978516 12.007812 19.978516 C 10.674812 19.977516 9.3544062 19.642812 8.1914062 19.007812 L 7.5175781 18.640625 L 6.7734375 18.816406 L 4.8046875 19.28125 L 5.2851562 17.496094 L 5.5019531 16.695312 L 5.0878906 15.976562 C 4.3898906 14.768562 4.0204844 13.387375 4.0214844 11.984375 C 4.0234844 7.582375 7.6067656 4 12.009766 4 z M 8.4765625 7.375 C 8.3095625 7.375 8.0395469 7.4375 7.8105469 7.6875 C 7.5815469 7.9365 6.9355469 8.5395781 6.9355469 9.7675781 C 6.9355469 10.995578 7.8300781 12.182609 7.9550781 12.349609 C 8.0790781 12.515609 9.68175 15.115234 12.21875 16.115234 C 14.32675 16.946234 14.754891 16.782234 15.212891 16.740234 C 15.670891 16.699234 16.690438 16.137687 16.898438 15.554688 C 17.106437 14.971687 17.106922 14.470187 17.044922 14.367188 C 16.982922 14.263188 16.816406 14.201172 16.566406 14.076172 C 16.317406 13.951172 15.090328 13.348625 14.861328 13.265625 C 14.632328 13.182625 14.464828 13.140625 14.298828 13.390625 C 14.132828 13.640625 13.655766 14.201187 13.509766 14.367188 C 13.363766 14.534188 13.21875 14.556641 12.96875 14.431641 C 12.71875 14.305641 11.914938 14.041406 10.960938 13.191406 C 10.218937 12.530406 9.7182656 11.714844 9.5722656 11.464844 C 9.4272656 11.215844 9.5585938 11.079078 9.6835938 10.955078 C 9.7955938 10.843078 9.9316406 10.663578 10.056641 10.517578 C 10.180641 10.371578 10.223641 10.267562 10.306641 10.101562 C 10.389641 9.9355625 10.347156 9.7890625 10.285156 9.6640625 C 10.223156 9.5390625 9.737625 8.3065 9.515625 7.8125 C 9.328625 7.3975 9.131125 7.3878594 8.953125 7.3808594 C 8.808125 7.3748594 8.6425625 7.375 8.4765625 7.375 z">
@@ -419,6 +103,7 @@
         </div>
     </div>
 
+    <script type="module" src="js/menu.js"></script>
 </body>
 
 </html>

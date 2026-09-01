@@ -670,3 +670,17 @@ h2{
   transform: scale(1.1);         /* opcional: agranda un poco */
   accent-color: var(--colorPrimario);
 }
+
+/* ===== Generado por el motor de flujos (js/flujo.js) ===== */
+
+/* Cada paso del modal aparece con la misma transicion que antes */
+.paso {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Nota descriptiva bajo el titulo de una subseccion del menu */
+.nota-seccion {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
